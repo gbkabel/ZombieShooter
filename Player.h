@@ -11,6 +11,7 @@ private:
 	Vector2f mousePosition;
 	Sprite playerSprite;
 	Texture playerTexture;
+	Vector2f resolution;
 	bool upPressed;
 	bool downPressed;
 	bool leftPressed;
@@ -18,6 +19,8 @@ private:
 public:
 	Player();
 	void spawn(Vector2f resolution);
+	FloatRect getPosition();
+	Vector2f getCenter();
 	int getHealth();
 	Sprite getSprite();
 	void moveLeft();

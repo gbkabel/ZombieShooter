@@ -13,6 +13,18 @@ void Player::spawn(Vector2f resolution)
 {
 	mousePosition.x = resolution.x / 2;
 	mousePosition.y = resolution.y / 2;
+	resolution.x = resolution.x;
+	resolution.y = resolution.y;
+}
+
+FloatRect Player::getPosition()
+{
+	return playerSprite.getGlobalBounds();
+}
+
+Vector2f Player::getCenter()
+{
+	return mousePosition;
 }
 
 int Player::getHealth()
@@ -22,7 +34,7 @@ int Player::getHealth()
 
 Sprite Player::getSprite()
 {
-	return Sprite();
+	return playerSprite;
 }
 
 void Player::moveLeft()
