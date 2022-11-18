@@ -1,33 +1,16 @@
 #include <SFML/Graphics.hpp>
-
+#include "Player.h"
 
 // Make code easier to type with "using namespace"
 using namespace sf;
 
 int main()
 {
-	// Create a video mode object
-	VideoMode vm(1920, 1080);
-
-	// Create and open a window for the game
-	RenderWindow window(vm, "Timber!!!", Style::Default);
-
-	// Create a texture to hold a graphic on the GPU
-	Texture textureBackground;
-
-	// Load a graphic into the texture
-	textureBackground.loadFromFile("graphics/background.png");
-
-	// Create a sprite
-	Sprite spriteBackground;
-
-	// Attach the texture to the sprite
-	spriteBackground.setTexture(textureBackground);
-
-	// Set the spriteBackground to cover the screen
-	spriteBackground.setPosition(0, 0);
-
-
+	Vector2f resolution;
+	resolution.x = VideoMode::getDesktopMode().width;
+	resolution.y = VideoMode::getDesktopMode().height;
+	RenderWindow window(VideoMode(resolution.x, resolution.y),"Zombie Shooter!", Style::Default);
+	Player player;
 	while (window.isOpen())
 	{
 
@@ -36,7 +19,6 @@ int main()
 		Handle the players input
 		****************************************
 		*/
-
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			window.close();
@@ -56,11 +38,12 @@ int main()
 		*/
 
 		// Clear everything from the last frame
-		window.clear();
+		//window.clear();
 
 		// Draw our game scene here
-		window.draw(spriteBackground);
-
+		//window.draw(spriteBackground);
+		player.spawn(resolution);
+		window.draw(player.getSprite());
 		// Show everything we just drew
 		window.display();
 

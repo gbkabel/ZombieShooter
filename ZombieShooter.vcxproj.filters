@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Graphics">
+    <Filter Include="graphics">
       <UniqueIdentifier>{7cd6e909-3ec3-4b7e-8558-0356d7a9bce6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -27,7 +27,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\crosshair.png">
-      <Filter>Graphics</Filter>
+      <Filter>graphics</Filter>
+    </Image>
+    <Image Include="..\..\..\Downloads\shooter1.png">
+      <Filter>graphics</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
