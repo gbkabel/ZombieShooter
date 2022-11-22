@@ -6,22 +6,16 @@ using namespace sf;
 class Player
 {
 private:
-	float speed;
-	int health;
-	Vector2f mousePosition;
-	Sprite playerSprite;
 	Texture playerTexture;
-	Vector2f resolution;
+	Sprite playerSprite;
+	const float speed = 100;
 	bool upPressed;
 	bool downPressed;
 	bool leftPressed;
 	bool rightPressed;
+	Vector2f playerPosition;
 public:
 	Player();
-	void spawn(Vector2f resolution);
-	FloatRect getPosition();
-	Vector2f getCenter();
-	int getHealth();
 	Sprite getSprite();
 	void moveLeft();
 	void moveRight();
@@ -31,5 +25,6 @@ public:
 	void stopRight();
 	void stopUp();
 	void stopDown();
+	FloatRect getPosition();
 	void update(float elapsedTime, Vector2i mousePosition);
 };
