@@ -1,146 +1,84 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 
-// Make code easier to type with "using namespace"
+#include <iostream>
+
 using namespace sf;
 
 int main()
 {
-	enum class State { PAUSED, GAME_OVER, PLAYING };
-	State state = State::GAME_OVER;
-	Vector2f resolution;
-	resolution.x = VideoMode::getDesktopMode().width;
-	resolution.y = VideoMode::getDesktopMode().height;
-	RenderWindow window(VideoMode(resolution.x, resolution.y),"Zombie Shooter!", Style::Default);
-	View mainView(FloatRect(0, 0, resolution.x, resolution.y));
+	RenderWindow window(VideoMode(640, 360), "zombie");
+	Player player;
 	Clock clock;
 	Time gameTimeTotal;
 	Vector2i mouseScreenPosition;
-	Player player;
 	while (window.isOpen())
 	{
-
-		/*
-		****************************************
-		Handle the players input
-		****************************************
-		*/
-
 		Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == Event::KeyPressed)
+			switch (event.type)
 			{
-				if (event.key.code == Keyboard::Return &&
-					state == State::PLAYING)
-				{
-					state = State::PAUSED;
-				}
-				else if (event.key.code == Keyboard::Return &&
-					state == State::PAUSED)
-				{
-					state = State::PLAYING;
-					clock.restart();
-				}
+			case Event::Closed:
+				window.close();
+				break;
 			}
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		if (Keyboard::isKeyPressed(Keyboard::W))
 		{
-			window.close();
+			player.moveUp();
 		}
-		if (state == State::PLAYING)
+		else
 		{
-			if (Keyboard::isKeyPressed(Keyboard::W))
-			{
-				player.moveUp();
-			}
-			else
-			{
-				player.stopUp();
-			}
-
-			if (Keyboard::isKeyPressed(Keyboard::S))
-			{
-				player.moveDown();
-			}
-			else
-			{
-				player.stopDown();
-			}
-
-			if (Keyboard::isKeyPressed(Keyboard::A))
-			{
-				player.moveLeft();
-			}
-			else
-			{
-				player.stopLeft();
-			}
-
-			if (Keyboard::isKeyPressed(Keyboard::D))
-			{
-				player.moveRight();
-			}
-			else
-			{
-				player.stopRight();
-			}
+			player.stopUp();
 		}
-		/*
-		****************************************
-		Update the scene
-		****************************************
-		*/
-		player.spawn(resolution);
 
-		if (state == State::PLAYING)
+		if (Keyboard::isKeyPressed(Keyboard::S))
 		{
-			// Update the delta time
-			Time dt = clock.restart();
-			// Update the total game time
-			gameTimeTotal += dt;
-			// Make a decimal fraction of 1 from the delta time
-			float dtAsSeconds = dt.asSeconds();
-
-			// Where is the mouse pointer
-			mouseScreenPosition = Mouse::getPosition();
-
-			// Update the player
-			player.update(dtAsSeconds, Mouse::getPosition());
-
-			// Make a note of the players new position
-			Vector2f playerPosition(player.getCenter());
-
-			// Make the view centre around the player				
-			mainView.setCenter(player.getCenter());
+			player.moveDown();
+		}
+		else
+		{
+			player.stopDown();
 		}
 
-		/*
-		****************************************
-		Draw the scene
-		****************************************
-		*/
+		if (Keyboard::isKeyPressed(Keyboard::A))
+		{
+			player.moveLeft();
+		}
+		else
+		{
+			player.stopLeft();
+		}
 
-			if (state == State::PLAYING)
-			{
-				window.clear();
+		if (Keyboard::isKeyPressed(Keyboard::D))
+		{
+			player.moveRight();
+		}
+		else
+		{
+			player.stopRight();
+		}
+		Time dt = clock.restart();
+		
+		gameTimeTotal += dt;
+		// Make a decimal fraction of 1 from the delta time
+		float dtAsSeconds = dt.asSeconds();
 
-				// set the mainView to be displayed in the window
-				// And draw everything related to it
-				window.setView(mainView);
+		// Where is the mouse pointer
+		mouseScreenPosition = Mouse::getPosition();
 
-				// Draw the player
-				window.draw(player.getSprite());
-			}
+		// Convert mouse position to world coordinates of mainView
+		//mouseWorldPosition = window.mapPixelToCoords(Mouse::getPosition(), mainView);
 
-		// Draw our game scene here
+		// Update the player
+		player.update(dtAsSeconds, Mouse::getPosition());
 
-		// Show everything we just drew
+		// Make a note of the players new position
+		//Vector2f playerPosition(player.getCenter());
+		window.clear();
+		window.draw(player.getSprite());
 		window.display();
-
-
 	}
-
-	return 0;
 }
 
