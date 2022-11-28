@@ -11,7 +11,7 @@ LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 APPNAME = ZombieShooterV2.out
 EXT = .cpp
 SRCDIR = ./code
-OBJDIR = ./obj
+OBJDIR = .
 
 ############## Do not change anything from here downwards! #############
 SRC = $(wildcard $(SRCDIR)/*$(EXT))
