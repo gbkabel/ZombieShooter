@@ -14,8 +14,9 @@ private:
 	bool leftPressed;
 	bool rightPressed;
 	Vector2f playerPosition;
+	int spriteHDirection = 1;
 public:
-	Player();
+	Player(int, int);
 	Sprite getSprite();
 	void moveLeft();
 	void moveRight();

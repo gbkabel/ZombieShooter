@@ -1,9 +1,11 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player(int startX, int startY)
 {
 	playerTexture.loadFromFile("shooter1.png");
 	playerSprite.setTexture(playerTexture);
+	playerSprite.setOrigin(playerSprite.getLocalBounds().width/2, playerSprite.getLocalBounds().height/2);
+	playerPosition = {(float) startX, (float) startY};
 }
 
 Sprite Player::getSprite()
@@ -69,14 +71,17 @@ void Player::update(float elapsedTime, Vector2i mousePosition)
 
 	if (rightPressed)
 	{
+		spriteHDirection = 1;
 		playerPosition.x += speed * elapsedTime;
 	}
 
 	if (leftPressed)
 	{
+		spriteHDirection = -1;
 		playerPosition.x -= speed * elapsedTime;
 	}
 
+	playerSprite.setScale(spriteHDirection, 1);
 	playerSprite.setPosition(playerPosition);
 
 

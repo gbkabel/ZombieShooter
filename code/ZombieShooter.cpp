@@ -7,8 +7,10 @@ using namespace sf;
 
 int main()
 {
-	RenderWindow window(VideoMode(640, 360), "zombie");
-	Player player;
+	Vector2i windowSize = {640, 360};
+
+	RenderWindow window(VideoMode(windowSize.x, windowSize.y), "ZombieShooterV2");
+	Player player(windowSize.x/2, windowSize.y/2);
 	Clock clock;
 	Time gameTimeTotal;
 	Vector2i mouseScreenPosition;
@@ -21,6 +23,13 @@ int main()
 			{
 			case Event::Closed:
 				window.close();
+				break;
+
+			case Event::KeyPressed:
+				if (event.key.code == Keyboard::Escape) window.close();
+				break;
+
+			default:
 				break;
 			}
 		}
