@@ -10,7 +10,7 @@ int main()
 	Vector2i windowSize = {640, 360};
 
 	RenderWindow window(VideoMode(windowSize.x, windowSize.y), "ZombieShooterV2");
-	Player player(windowSize.x/2, windowSize.y/2);
+	Player player(windowSize.x, windowSize.y);
 	Clock clock;
 	Time gameTimeTotal;
 	Vector2i mouseScreenPosition;

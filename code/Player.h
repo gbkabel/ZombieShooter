@@ -15,6 +15,9 @@ private:
 	bool rightPressed;
 	Vector2f playerPosition;
 	int spriteHDirection = 1;
+	Vector2f arenaSize;
+	void ValidateCollision();
+	void DetermineMoveDirection(float);
 public:
 	Player(int, int);
 	Sprite getSprite();
