@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 using namespace sf;
 
@@ -9,17 +10,25 @@ private:
 	Texture playerTexture;
 	Sprite playerSprite;
 	const float speed = 100;
+	const int HIT_INVINCIBILITY_TIME_MS = 200;
+	int m_Health;
+	int m_MaxHealth;
 	bool upPressed;
 	bool downPressed;
 	bool leftPressed;
 	bool rightPressed;
 	Vector2f playerPosition;
+	Vector2f playerInputVector = {0, 0};
+	Time m_LastHit;
 	int spriteHDirection = 1;
-	Vector2f arenaSize;
+	Vector2i arenaSize;
 	void ValidateCollision();
-	void DetermineMoveDirection(float);
+	void DetermineMoveDirection();
 public:
 	Player(int, int);
+	void Heal(int);
+	bool Hit(Time, int);
+	Time getLastHitTime();
 	Sprite getSprite();
 	void moveLeft();
 	void moveRight();

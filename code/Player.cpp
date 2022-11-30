@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player(int windowSizeX, int windowSizeY)
 {
@@ -60,7 +61,11 @@ FloatRect Player::getPosition()
 
 void Player::update(float elapsedTime, Vector2i mousePosition)
 {
-	DetermineMoveDirection(elapsedTime); //Check Input
+	DetermineMoveDirection(); //Check Input
+
+	playerPosition.x += playerInputVector.x * speed * elapsedTime;
+	playerPosition.y -= playerInputVector.y * speed * elapsedTime;
+
 	ValidateCollision(); //Check collision
 
 	//Move the player and set sprite scale (which way its facing)
@@ -73,48 +78,68 @@ void Player::ValidateCollision()
 	// Keep the player in the arena
 	Rect playerBounds = playerSprite.getLocalBounds();
 
-	if (playerPosition.x > arenaSize.x - playerBounds.width)
+	if (playerPosition.x > arenaSize.x - (playerBounds.width/2))
 	{
-		playerPosition.x = arenaSize.x - playerBounds.width;
+		playerPosition.x = arenaSize.x - (playerBounds.width/2);
 	}
 
-	if (playerPosition.x < 0 + playerBounds.width)
+	if (playerPosition.x < (playerBounds.width/2))
 	{
-		playerPosition.x = 0 + playerBounds.width;
+		playerPosition.x = (playerBounds.width/2);
 	}
 
-	if (playerPosition.y > arenaSize.y - playerBounds.height)
+	if (playerPosition.y > arenaSize.y - (playerBounds.height/2))
 	{
-		playerPosition.y = arenaSize.y - playerBounds.height;
+		playerPosition.y = arenaSize.y - (playerBounds.height/2);
 	}
 
-	if (playerPosition.y < 0 + playerBounds.height)
+	if (playerPosition.y < (playerBounds.height/2))
 	{
-		playerPosition.y = 0 + playerBounds.height;
+		playerPosition.y = (playerBounds.height/2);
 	}
 }
 
-void Player::DetermineMoveDirection(float _elapsedTime)
+void Player::DetermineMoveDirection()
 {
-	if (upPressed)
-	{
-		playerPosition.y -= speed * _elapsedTime;
-	}
+	Vector2f rawInput = {0, 0};
+	playerInputVector = rawInput;
 
-	if (downPressed)
-	{
-		playerPosition.y += speed * _elapsedTime;
-	}
+	rawInput.x = rightPressed - leftPressed;
+	rawInput.y = upPressed - downPressed;
 
-	if (rightPressed)
+	//Normalize Input vector so that the magnitude is always 1
+	if (abs(rawInput.x) > 0 || abs(rawInput.y) > 0)
 	{
-		spriteHDirection = 1;
-		playerPosition.x += speed * _elapsedTime;
-	}
+		float m = sqrt((rawInput.x * rawInput.x) + (rawInput.y * rawInput.y));
+		playerInputVector.x = rawInput.x / m;
+		playerInputVector.y = rawInput.y / m;
 
-	if (leftPressed)
-	{
-		spriteHDirection = -1;
-		playerPosition.x -= speed * _elapsedTime;
+		if (abs(rawInput.x) > 0)
+		{
+			spriteHDirection = rawInput.x;
+		}
 	}
+}
+
+Time Player::getLastHitTime()
+{
+	return m_LastHit;
+}
+
+bool Player::Hit(Time timeHit, int damage)
+{
+	if (timeHit.asMilliseconds() - m_LastHit.asMilliseconds() > HIT_INVINCIBILITY_TIME_MS)
+	{
+		m_LastHit = timeHit;
+		m_Health -= damage;
+		return true;
+	}
+	else return false;
+}
+
+void Player::Heal(int amount)
+{
+	m_Health += amount;
+
+
 }

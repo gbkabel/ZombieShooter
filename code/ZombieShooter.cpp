@@ -9,7 +9,7 @@ int main()
 {
 	Vector2i windowSize = {640, 360};
 
-	RenderWindow window(VideoMode(windowSize.x, windowSize.y), "ZombieShooterV2");
+	RenderWindow window(VideoMode(windowSize.x, windowSize.y), "Zombie Shooter V2");
 	Player player(windowSize.x, windowSize.y);
 	Clock clock;
 	Time gameTimeTotal;
