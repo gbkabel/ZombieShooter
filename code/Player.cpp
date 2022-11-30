@@ -1,65 +1,75 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(int windowSizeX, int windowSizeY)
+Player::Player()
 {
-	arenaSize = {windowSizeX, windowSizeY};
-	playerTexture.loadFromFile("shooter1.png");
+	playerTexture.loadFromFile("graphics/shooter1.png");
 	playerSprite.setTexture(playerTexture);
 	playerSprite.setOrigin(playerSprite.getLocalBounds().width/2, playerSprite.getLocalBounds().height/2);
-	playerPosition = {(float) windowSizeX/2, (float) windowSizeY/2};
+	playerSprite.setPosition(-playerSprite.getLocalBounds().width, -playerSprite.getLocalBounds().height);
 }
 
-Sprite Player::getSprite()
+void Player::Spawn(int windowX, int windowY)
+{
+	arenaSize = {windowX, windowY};
+	playerPosition = {(float) windowX/2, (float) windowY/2};
+}
+
+Sprite Player::GetSprite()
 {
 	return playerSprite;
 }
 
-void Player::moveLeft()
+void Player::MoveLeft()
 {
 	leftPressed = true;
 }
 
-void Player::moveRight()
+void Player::MoveRight()
 {
 	rightPressed = true;
 }
 
-void Player::moveUp()
+void Player::MoveUp()
 {
 	upPressed = true;
 }
 
-void Player::moveDown()
+void Player::MoveDown()
 {
 	downPressed = true;
 }
 
-void Player::stopLeft()
+void Player::StopLeft()
 {
 	leftPressed = false;
 }
 
-void Player::stopRight()
+void Player::StopRight()
 {
 	rightPressed = false;
 }
 
-void Player::stopUp()
+void Player::StopUp()
 {
 	upPressed = false;
 }
-void Player::stopDown()
+void Player::StopDown()
 {
 	downPressed = false;
 }
 
-FloatRect Player::getPosition()
+FloatRect Player::GetPosition()
 {
-	return playerSprite.getGlobalBounds();
+	return playerSprite.getGlobalBounds();;
 }
 
-void Player::update(float elapsedTime, Vector2i mousePosition)
+Vector2f Player::GetCenter()
+{
+	return playerPosition;
+}
+
+void Player::Update(float elapsedTime, Vector2i mousePosition)
 {
 	DetermineMoveDirection(); //Check Input
 
@@ -121,7 +131,7 @@ void Player::DetermineMoveDirection()
 	}
 }
 
-Time Player::getLastHitTime()
+Time Player::GetLastHitTime()
 {
 	return m_LastHit;
 }
@@ -140,6 +150,5 @@ bool Player::Hit(Time timeHit, int damage)
 void Player::Heal(int amount)
 {
 	m_Health += amount;
-
-
+	if (m_Health > m_MaxHealth) m_Health = m_MaxHealth;
 }
