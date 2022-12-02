@@ -26,4 +26,50 @@ void Engine::Input()
                 break;
         }
     }
+
+    
+	// Where is the mouse pointer
+	mouseScreenPosition = Mouse::getPosition();
+
+	// Convert mouse position to world coordinates of mainView
+	//mouseWorldPosition = window.mapPixelToCoords(Mouse::getPosition(), main_view);
+
+	if (Keyboard::isKeyPressed(Keyboard::W))
+	{
+		player.MoveUp();
+	}
+	else
+	{
+		player.StopUp();
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::S))
+	{
+		player.MoveDown();
+	}
+	else
+	{
+		player.StopDown();
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::A))
+	{
+		player.MoveLeft();
+	}
+	else
+	{
+		player.StopLeft();
+	}
+    
+    if (Keyboard::isKeyPressed(Keyboard::D))
+	{
+		player.MoveRight();
+	}
+	else
+	{
+		player.StopRight();
+	}
+
+    // Make a note of the players new position
+	Vector2f playerPosition(player.GetCenter());
 }

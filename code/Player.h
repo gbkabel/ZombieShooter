@@ -24,6 +24,7 @@ private:
 	Vector2i arenaSize;
 	void ValidateCollision();
 	void DetermineMoveDirection();
+	
 public:
 	Player();
 	void Spawn(int, int);
