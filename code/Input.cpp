@@ -14,7 +14,7 @@ void Engine::Input()
                 }
                 if (event.key.code == Keyboard::Enter)
                 {
-                    m_Playing = true;
+                    state = State::PLAYING;
                 }
                 break;
 

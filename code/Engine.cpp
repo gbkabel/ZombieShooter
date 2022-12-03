@@ -8,15 +8,15 @@ Engine::Engine()
     m_MainView.setSize(windowSize);
     m_HudView.reset(FloatRect(0,0, windowSize.x, windowSize.y));
 
+	font.loadFromFile("fonts/Zombie.ttf");
+    textBox.setFont(font);
+
 	textureBackground.loadFromFile("graphics/Tiles.png");
 }
 
 void Engine::Run()
 {
-	enum class State { MAIN_MENU, PAUSED, GAME_OVER, PLAYING };
-	State state = State::MAIN_MENU;
 	IntRect arena;
-
     while (m_Window.isOpen())
     {
         Time dt = clock.restart();
@@ -49,7 +49,6 @@ void Engine::Run()
 						int tileSize = CreateBackground(background, arena);
 
 						state = State::PLAYING;
-                        m_Playing = true;
 						player.Spawn(windowSize.x, windowSize.y);
 						clock.restart();
 					}

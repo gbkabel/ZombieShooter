@@ -5,7 +5,7 @@
 
 void Engine::Update(float dtAsSeconds)
 {
-    if (m_Playing)
+    if (state == State::PLAYING)
     {
         m_TimeElapsed += dtAsSeconds;
     	player.Update(dtAsSeconds, Mouse::getPosition());
