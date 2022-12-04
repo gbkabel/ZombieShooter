@@ -86,7 +86,7 @@ void Player::Update(float elapsedTime, Vector2i mousePosition)
 void Player::ValidateCollision()
 {
 	// Keep the player in the arena
-	Rect playerBounds = playerSprite.getLocalBounds();
+	FloatRect playerBounds = playerSprite.getLocalBounds();
 
 	if (playerPosition.x > arenaSize.x - (playerBounds.width/2))
 	{
