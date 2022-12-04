@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include "ZombieShooter.h"
-
+#include "Zombie.h"
 Engine::Engine()
 {
 
@@ -50,6 +50,7 @@ void Engine::Run()
 
 						state = State::PLAYING;
 						player.Spawn(windowSize.x, windowSize.y);
+						zombie.Spawn(windowSize.x, windowSize.y);
 						clock.restart();
 					}
 				}

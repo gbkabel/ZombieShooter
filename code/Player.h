@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
@@ -21,17 +22,17 @@ private:
 	Vector2f playerInputVector = {0, 0};
 	Time m_LastHit;
 	int spriteHDirection = 1;
-	Vector2i arenaSize;
 	void ValidateCollision();
 	void DetermineMoveDirection();
 	
 public:
+	Vector2i arenaSize;
 	Player();
 	void Spawn(int, int);
 	void Heal(int);
 	bool Hit(Time, int);
 	Time GetLastHitTime();
-	Sprite GetSprite();
+	virtual Sprite GetSprite();
 	void MoveLeft();
 	void MoveRight();
 	void MoveUp();
@@ -44,3 +45,5 @@ public:
 	Vector2f GetCenter();
 	void Update(float elapsedTime, Vector2i mousePosition);
 };
+
+#endif
