@@ -15,7 +15,7 @@ void Player::Spawn(int windowX, int windowY)
 	playerPosition = {(float) windowX/2, (float) windowY/2};
 }
 
-Sprite Player::GetSprite()
+Sprite Player::GetSprite() const
 {
 	return playerSprite;
 }

@@ -29,6 +29,8 @@ void Engine::Draw()
         m_Window.draw(background, &textureBackground);
         m_Window.draw(player.GetSprite());
         
+        m_Window.draw(zombie.GetSprite());
+
         ss << fixed << setprecision(2) << m_TimeElapsed;
         textboxString = ss.str();
         textPosition = { windowSize.x - ((MAIN_MENU_CHAR_SIZE * textboxString.length())/2), 0};

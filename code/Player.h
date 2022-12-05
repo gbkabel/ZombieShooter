@@ -33,7 +33,7 @@ public:
 	void Heal(int);
 	bool Hit(Time, int);
 	Time GetLastHitTime();
-	virtual Sprite GetSprite();
+	virtual Sprite GetSprite() const;
 	void MoveLeft();
 	void MoveRight();
 	void MoveUp();

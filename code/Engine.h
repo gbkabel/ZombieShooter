@@ -31,6 +31,7 @@ class Engine
         float m_TimeElapsed = 0;
 
     	Player player;
+        Zombie zombie;
         Clock clock;
 
         VertexArray background;
@@ -45,14 +46,14 @@ class Engine
 
         Sprite m_BackgroundSprite;
         Texture m_BackgroundTexture;
-        std::string textboxString = "Debug";
+        string textboxString = "Debug";
 
 
         void Input();
         void Update(float dtAsSeconds);
         void Draw();
 
-        void DrawTextBox(Text& _textbox, std::string _text, int _fontSize, Vector2f _textPosition, TextBoxAnchor originPoint = TextBoxAnchor::CENTER);
+        void DrawTextBox(Text& _textbox, string _text, int _fontSize, Vector2f _textPosition, TextBoxAnchor originPoint = TextBoxAnchor::CENTER);
 };
 
 #endif
