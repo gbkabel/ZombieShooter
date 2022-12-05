@@ -14,7 +14,7 @@ public:
     vector<Zombie*> GetZombies() const;
 
 private:
-    const int MAX_ZOMBIES_ON_SCREEN = 10;
+    const int MAX_ZOMBIES_ON_SCREEN = 100;
     vector<Zombie*> m_Zombies;
     Vector2f m_ArenaSize;
 };
