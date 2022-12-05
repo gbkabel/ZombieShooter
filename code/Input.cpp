@@ -1,31 +1,49 @@
 #include "Engine.h"
+#include "ZombieShooter.h"
+
 
 void Engine::Input()
 {
-    Event event;
-    while (m_Window.pollEvent(event))
-    {
-        switch (event.type)
-        {
-            case (Event::KeyPressed):
-                if (event.key.code == Keyboard::Escape)
-                {
-                    m_Window.close();
-                }
-                if (event.key.code == Keyboard::Enter)
-                {
-                    state = State::PLAYING;
-                }
-                break;
+	IntRect arena;
+  	Event event;
+	while (m_Window.pollEvent(event))
+	{
+		switch (event.type)
+		{
+		case Event::Closed:
+			m_Window.close();
+			break;
 
-            case (Event::Closed):
-                m_Window.close();
-                break;
+		case Event::KeyPressed:
+			if (event.key.code == Keyboard::Escape) m_Window.close();
+			if (event.key.code == Keyboard::Enter) 
+			{
+				if (state == State::MAIN_MENU || state == State::GAME_OVER)
+				{
+					//Prepare level
+					arena.width = windowSize.x;
+					arena.height = windowSize.y;
+					arena.left = 0;
+					arena.top = 0;
 
-            default:
-                break;
-        }
-    }
+					int tileSize = CreateBackground(background, arena);
+					Zombie* zombie = new Zombie(100, arena.width, arena.height);
+					zombie->Spawn(windowSize.x/4, windowSize.y/4);
+					gm->StartGame();
+					
+
+					state = State::PLAYING;
+					player->Spawn(windowSize.x/2, windowSize.y/2);
+					//zombie->Spawn(windowSize.x, windowSize.y);
+					clock.restart();
+					}
+				}
+				break;
+
+			default:
+				break;
+			}
+		}	
 
     
 	// Where is the mouse pointer
@@ -36,40 +54,40 @@ void Engine::Input()
 
 	if (Keyboard::isKeyPressed(Keyboard::W))
 	{
-		player.MoveUp();
+		player->MoveUp();
 	}
 	else
 	{
-		player.StopUp();
+		player->StopUp();
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::S))
 	{
-		player.MoveDown();
+		player->MoveDown();
 	}
 	else
 	{
-		player.StopDown();
+		player->StopDown();
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
-		player.MoveLeft();
+		player->MoveLeft();
 	}
 	else
 	{
-		player.StopLeft();
+		player->StopLeft();
 	}
     
     if (Keyboard::isKeyPressed(Keyboard::D))
 	{
-		player.MoveRight();
+		player->MoveRight();
 	}
 	else
 	{
-		player.StopRight();
+		player->StopRight();
 	}
 
     // Make a note of the players new position
-	Vector2f playerPosition(player.GetCenter());
+	Vector2f playerPosition(player->GetCharPosition());
 }

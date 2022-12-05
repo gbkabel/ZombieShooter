@@ -8,7 +8,7 @@ void Engine::Update(float dtAsSeconds)
     if (state == State::PLAYING)
     {
         m_TimeElapsed += dtAsSeconds;
-    	player.Update(dtAsSeconds, Mouse::getPosition());
-
+    	player->Update(dtAsSeconds, Mouse::getPosition());
+        gm->CheckZombies(player->GetCharPosition(), dtAsSeconds);
     }
 }

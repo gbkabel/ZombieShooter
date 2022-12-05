@@ -5,6 +5,8 @@
 #include "TextureHolder.h"
 #include "Player.h"
 #include "Zombie.h"
+#include <vector>
+#include "GameManager.h"
 
 using namespace std;
 using namespace sf;
@@ -30,8 +32,9 @@ class Engine
         float m_WindowScale = 0.8f;
         float m_TimeElapsed = 0;
 
-    	Player player;
-        Zombie zombie;
+    	Player* player;
+        GameManager* gm;
+
         Clock clock;
 
         VertexArray background;

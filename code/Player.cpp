@@ -1,24 +1,16 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player()
+
+Player::Player(int startingHealth, int arenaX, int arenaY) : Character(startingHealth)
 {
-	playerTexture.loadFromFile("graphics/shooter1.png");
-	playerSprite.setTexture(playerTexture);
-	playerSprite.setOrigin(playerSprite.getLocalBounds().width/2, playerSprite.getLocalBounds().height/2);
-	playerSprite.setPosition(-playerSprite.getLocalBounds().width, -playerSprite.getLocalBounds().height);
+	LoadAndSetTextureFromFile("graphics/shooter1.png");
+	SetSpriteOrigin({m_Sprite.getLocalBounds().width/2, m_Sprite.getLocalBounds().height/2});
+	SetPosition({-m_Sprite.getLocalBounds().width, -m_Sprite.getLocalBounds().height});
+	//Initialize the Player in the top right corner of the world, just off screen
+	m_ArenaSize = {arenaX, arenaY};
 }
 
-void Player::Spawn(int windowX, int windowY)
-{
-	arenaSize = {windowX, windowY};
-	playerPosition = {(float) windowX/2, (float) windowY/2};
-}
-
-Sprite Player::GetSprite() const
-{
-	return playerSprite;
-}
 
 void Player::MoveLeft()
 {
@@ -59,54 +51,25 @@ void Player::StopDown()
 	downPressed = false;
 }
 
-FloatRect Player::GetPosition()
+void Player::Spawn(int _startPositionX, int _startPositionY)
 {
-	return playerSprite.getGlobalBounds();;
-}
-
-Vector2f Player::GetCenter()
-{
-	return playerPosition;
+    this->SetPosition({(float)_startPositionX, (float)_startPositionY});	
 }
 
 void Player::Update(float elapsedTime, Vector2i mousePosition)
 {
 	DetermineMoveDirection(); //Check Input
 
-	playerPosition.x += playerInputVector.x * speed * elapsedTime;
-	playerPosition.y -= playerInputVector.y * speed * elapsedTime;
+	Vector2f desiredDirection = {m_CharPosition.x, m_CharPosition.y};
+	desiredDirection += {playerInputVector.x * m_Speed * elapsedTime, playerInputVector.y * -m_Speed * elapsedTime};
 
-	ValidateCollision(); //Check collision
+
+	SetPosition(desiredDirection);
 
 	//Move the player and set sprite scale (which way its facing)
-	playerSprite.setScale(spriteHDirection, 1);
-	playerSprite.setPosition(playerPosition);
-}
-
-void Player::ValidateCollision()
-{
-	// Keep the player in the arena
-	FloatRect playerBounds = playerSprite.getLocalBounds();
-
-	if (playerPosition.x > arenaSize.x - (playerBounds.width/2))
-	{
-		playerPosition.x = arenaSize.x - (playerBounds.width/2);
-	}
-
-	if (playerPosition.x < (playerBounds.width/2))
-	{
-		playerPosition.x = (playerBounds.width/2);
-	}
-
-	if (playerPosition.y > arenaSize.y - (playerBounds.height/2))
-	{
-		playerPosition.y = arenaSize.y - (playerBounds.height/2);
-	}
-
-	if (playerPosition.y < (playerBounds.height/2))
-	{
-		playerPosition.y = (playerBounds.height/2);
-	}
+	m_Sprite.setScale(m_SpriteHDirection, 1);
+	
+	ValidateCollision(); //Check collision
 }
 
 void Player::DetermineMoveDirection()
@@ -126,7 +89,7 @@ void Player::DetermineMoveDirection()
 
 		if (abs(rawInput.x) > 0)
 		{
-			spriteHDirection = rawInput.x;
+			m_SpriteHDirection = rawInput.x;
 		}
 	}
 }

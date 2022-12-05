@@ -3,15 +3,17 @@
 
 #include "Player.h"
 
-class Zombie : public Player
+using namespace sf;
+
+class Zombie : public Character
 {
 private:
-	Texture zombieTexture;
-	Sprite zombieSprite;
-	Vector2f zombiePosition;
+	int damage;
+	void Damage(int);
 public:
-	Zombie();
-	void Spawn(int, int);
+	Zombie(int, int, int);
+	void Spawn(int, int) override;
+	void Update(Vector2f, float);
 };
 
 #endif

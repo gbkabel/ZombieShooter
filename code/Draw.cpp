@@ -27,16 +27,17 @@ void Engine::Draw()
         
     case (State::PLAYING):
         m_Window.draw(background, &textureBackground);
-        m_Window.draw(player.GetSprite());
+        m_Window.draw(player->GetSprite());
         
-        m_Window.draw(zombie.GetSprite());
+        for (size_t i = 0; i < gm->GetZombies().size(); i++)
+        {
+            m_Window.draw(gm->GetZombies()[i]->GetSprite());
+        }
 
         ss << fixed << setprecision(2) << m_TimeElapsed;
         textboxString = ss.str();
         textPosition = { windowSize.x - ((MAIN_MENU_CHAR_SIZE * textboxString.length())/2), 0};
         DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
-
-
         break;
         
     case (State::PAUSED):
