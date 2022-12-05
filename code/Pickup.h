@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PICKUP_H
+#define PICKUP_H
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -61,3 +62,5 @@ public:
 	void upgrade();
 
 };
+
+#endif

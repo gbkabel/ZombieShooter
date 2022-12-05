@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include "Player.h"
-#include <SFML/Graphics.hpp>
+
 #include <sstream>
 
 void Engine::Update(float dtAsSeconds)

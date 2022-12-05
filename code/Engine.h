@@ -1,8 +1,12 @@
-#pragma once
+#ifndef ENGINE_H
+#define ENGINE_H
+
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
 #include "Player.h"
+#include "Zombie.h"
 
+using namespace std;
 using namespace sf;
 
 class Engine
@@ -50,3 +54,5 @@ class Engine
 
         void DrawTextBox(Text& _textbox, std::string _text, int _fontSize, Vector2f _textPosition, TextBoxAnchor originPoint = TextBoxAnchor::CENTER);
 };
+
+#endif

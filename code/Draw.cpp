@@ -3,9 +3,6 @@
 #include <iostream>
 #include <sstream>
 
-
-using namespace std;
-
 void Engine::Draw()
 {
     Vector2f textPosition = {0,0};
@@ -31,7 +28,7 @@ void Engine::Draw()
     case (State::PLAYING):
         m_Window.draw(background, &textureBackground);
         m_Window.draw(player.GetSprite());
-
+        
         ss << fixed << setprecision(2) << m_TimeElapsed;
         textboxString = ss.str();
         textPosition = { windowSize.x - ((MAIN_MENU_CHAR_SIZE * textboxString.length())/2), 0};

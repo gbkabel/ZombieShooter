@@ -1,8 +1,7 @@
 #include "TextureHolder.h"
 #include <assert.h>
 
-using namespace sf;
-using namespace std;
+
 
 TextureHolder* TextureHolder::m_s_Instance = nullptr;
 

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BULLET_H
+#define BULLET_H
+
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -59,3 +61,5 @@ public:
 	void update(float elapsedTime);
 
 };
+
+#endif
