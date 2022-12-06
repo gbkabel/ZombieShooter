@@ -22,7 +22,7 @@ class Engine
         const int VERTS_IN_QUAD = 4;
         Vector2f windowSize = {640, 368};
         Font font;
-        Text textBox;
+        Text textbox;
         const int MAIN_MENU_CHAR_SIZE = 32;
 
         enum class TextBoxAnchor { TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT };
@@ -49,6 +49,10 @@ class Engine
 
         Sprite m_BackgroundSprite;
         Texture m_BackgroundTexture;
+
+	    Sprite spriteCrosshair;
+        Texture textureCrosshair;
+
         string textboxString = "Debug";
 
 
@@ -57,6 +61,9 @@ class Engine
         void Draw();
 
         void DrawTextBox(Text& _textbox, string _text, int _fontSize, Vector2f _textPosition, TextBoxAnchor originPoint = TextBoxAnchor::CENTER);
+        void RenderMainMenu();
+        void RenderGameScene();
+        void RenderGameOverScene();
 };
 
 #endif

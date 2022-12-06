@@ -1,11 +1,8 @@
 #include "Character.h"
 
-Character::Character(int _arenaX, int _arenaY, int _health, std::string _path = "")
+Character::Character(int _arenaX, int _arenaY, std::string _path = "")
 {
-    this->m_MaxHealth = _health;
-    this->m_Health = _health;
-
-	m_ArenaSize = { _arenaX, _arenaY };
+	this->m_ArenaSize = { _arenaX, _arenaY };
 
 	LoadAndSetTextureFromFile(_path);
 	SetSpriteOrigin({ m_Sprite.getLocalBounds().width / 2, m_Sprite.getLocalBounds().height / 2});
@@ -51,7 +48,7 @@ void Character::ValidateCollision()
 
 int Character::GetSpriteHorizontalDirection() const
 {
-    return m_SpriteHDirection;
+    return this->m_SpriteHDirection;
 }
 
 Sprite Character::GetSprite() const
@@ -77,5 +74,16 @@ void Character::SetPosition(Vector2f _position)
 
 void Character::SetSpeed(float _newSpeed)
 {
-	m_Speed = _newSpeed;
+	this->m_Speed = _newSpeed;
+}
+
+int Character::GetHealth()
+{
+	return this->m_Health;
+}
+
+void Character::SetHealth(int _amount)
+{
+	this->m_Health = _amount;
+	this->m_MaxHealth = _amount;
 }

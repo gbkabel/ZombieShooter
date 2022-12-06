@@ -17,9 +17,11 @@ protected:
 	float m_Speed = 100;
     void SetPosition(Vector2f);
     void SetSpeed(float);
+    void SetHealth(int);
 
 public:
-    Character(int, int, int, std::string);
+    Character(int, int, std::string);
+    int GetHealth();
 	void ValidateCollision();
     void LoadAndSetTextureFromFile(std::string);
     void SetSpriteOrigin(Vector2f);

@@ -34,8 +34,9 @@ void Engine::Input()
 					player->Spawn(windowSize.x/2, windowSize.y/2);
 
 					clock.restart();
-					}
+					m_TimeElapsed = 0;
 				}
+			}
 				break;
 
 			default:

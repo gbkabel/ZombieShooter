@@ -62,8 +62,8 @@ FloatRect Bullet::getPosition()
 void Bullet::update(float elapsedTime)
 {
 	// Update the bullet position variables
-	m_Position.x += m_DirectionOfTravel.x * m_BulletSpeed * elapsedTime;
-	m_Position.y += m_DirectionOfTravel.y * m_BulletSpeed * elapsedTime;
+	m_Position.x += m_DirectionOfTravel.x * BULLET_SPEED * elapsedTime;
+	m_Position.y += m_DirectionOfTravel.y * BULLET_SPEED * elapsedTime;
 
 	// Move the bullet
 	m_Sprite.setPosition(m_Position);

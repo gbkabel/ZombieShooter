@@ -2,9 +2,10 @@
 #include <iostream>
 
 
-Player::Player(int _arenaX, int _arenaY, int _startingHealth, std::string _path) : Character(_arenaX,_arenaY, _startingHealth, _path)
+Player::Player(int _arenaX, int _arenaY, int _startingHealth, std::string _path) : Character(_arenaX,_arenaY, _path)
 {
-	m_Speed = 100;
+	SetHealth(STARTING_HEALTH);
+	SetSpeed(STARTING_SPEED);
 }
 
 
@@ -49,13 +50,12 @@ void Player::StopDown()
 
 void Player::Spawn(int _startPositionX, int _startPositionY)
 {
-    this->SetPosition({(float)_startPositionX, (float)_startPositionY});	
+    this->SetPosition({(float)_startPositionX, (float)_startPositionY});
+	Heal(m_MaxHealth);
 }
 
-bool Player::Update(float elapsedTime)
+void Player::Update(float elapsedTime)
 {
-	if (m_Health <= 0) return false;
-
 	DetermineMoveDirection(); //Check Input
 
 	Vector2f desiredDirection = {m_CharPosition.x, m_CharPosition.y};
@@ -68,7 +68,6 @@ bool Player::Update(float elapsedTime)
 	m_Sprite.setScale(m_SpriteHDirection, 1);
 	
 	ValidateCollision(); //Check collision
-	return true;
 }
 
 void Player::DetermineMoveDirection()

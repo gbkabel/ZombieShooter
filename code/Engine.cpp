@@ -11,9 +11,15 @@ Engine::Engine()
     m_HudView.reset(FloatRect(0,0, windowSize.x, windowSize.y));
 
 	font.loadFromFile("fonts/Zombie.ttf");
-    textBox.setFont(font);
+    textbox.setFont(font);
+    textbox.setOutlineColor(Color::Black);
+    textbox.setOutlineThickness(2);
 
 	textureBackground.loadFromFile("graphics/Tiles.png");
+
+	textureCrosshair.loadFromFile("graphics/crosshair1.png");
+    spriteCrosshair.setTexture(textureCrosshair);
+	spriteCrosshair.setOrigin(spriteCrosshair.getGlobalBounds().width/2, spriteCrosshair.getGlobalBounds().height/2);
 }
 
 void Engine::Run()

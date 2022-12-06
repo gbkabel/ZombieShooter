@@ -1,8 +1,8 @@
 #include "Zombie.h"
 
-Zombie::Zombie(int _arenaX, int _arenaY, int _health, std::string _path) : Character(_arenaX, _arenaY, _health, _path)
+Zombie::Zombie(int _arenaX, int _arenaY, int _health, std::string _path) : Character(_arenaX, _arenaY, _path)
 {
-	
+	SetHealth(_health);
 }
 
 void Zombie::Spawn(int _startX, int _startY)
@@ -40,13 +40,7 @@ void Zombie::Update(Vector2f _coords, float _elapsedTime)
 	//Move the Zombie and set sprite scale (which way its facing)
 	m_Sprite.setScale(m_SpriteHDirection, 1);
 	
-	ValidateCollision(); //Check collision
-	CheckCollisionWithPlayer();
-}
-
-void Zombie::CheckCollisionWithPlayer()
-{
-
+	//ValidateCollision(); //Check collision
 }
 
 int Zombie::GetKillValue()
@@ -59,18 +53,16 @@ bool Zombie::IsAlive()
 	return m_IsAlive;
 }
 
-bool Zombie::Hit()
+bool Zombie::Hit(int _damage)
 {
-	m_Health--;
-
-	if (m_Health < 0)
+	m_Health -= _damage;
+	if (m_Health <= 0)
 	{
 		m_IsAlive = false;
 
 		m_MainTexture.loadFromFile("graphics/bloodPool1.png");
 		m_Sprite.setTexture(m_MainTexture);
 	}
-
 	return !m_IsAlive;
 }
 

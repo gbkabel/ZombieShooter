@@ -6,73 +6,28 @@
 
 void Engine::Draw()
 {
-    Vector2f textPosition = {0,0};
-    stringstream ss;
-
     //Clear previous frame
     m_Window.clear();
-    //m_Window.setView(m_MainView);
-    //m_Window.setView(m_HudView);    
+    m_Window.setView(m_MainView);
+    m_Window.setView(m_HudView);    
     Vector2f mouseWorldPosition;
-    m_Window.setMouseCursorVisible(false);
-	Sprite spriteCrosshair;
-	Texture textureCrosshair = TextureHolder::GetTexture("graphics/crosshair1.png");
-	spriteCrosshair.setTexture(textureCrosshair);
-	spriteCrosshair.setOrigin(25, 25);
+
 
     switch (state)
     {
     case (State::MAIN_MENU):
-        textboxString = "Zombie Shooter V2";
-        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE*2, {windowSize.x/2,0}, TextBoxAnchor::TOP_CENTER);
-
-        textboxString = "Press Enter to Start";
-        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, { windowSize.x/2, windowSize.y/2 });
-
-        m_Window.draw(textBox);
+        RenderMainMenu();
         break;
         
     case (State::PLAYING):
-        m_Window.draw(background, &textureBackground);
-
-        m_Window.draw(player->GetSprite());
-
-        spriteCrosshair.setPosition(mouseScreenPosition);
-
-        
-        m_Window.draw(spriteCrosshair);
-        for (size_t i = 0; i < gm->GetZombies().size(); i++)
-        {
-            m_Window.draw(gm->GetZombies()[i]->GetSprite());
-        }
-
-        for (size_t i = 0; i < gm->GetBullets().size(); i++)
-        {
-            m_Window.draw(gm->GetBullets()[i]->GetSprite());
-        }
-
-
-        ss << fixed << setprecision(2) << m_TimeElapsed;
-        textboxString = ss.str();
-        textPosition = { windowSize.x - ((MAIN_MENU_CHAR_SIZE * textboxString.length())/2), 0};
-        textBox.setFillColor(Color::White);
-        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
-
-        textboxString = "Health: " + to_string(player->GetHealth());
-        textPosition = {0,0};
-        textBox.setFillColor(Color::Red);
-        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
-
+        RenderGameScene();
         break;
         
     case (State::PAUSED):
         break;
         
     case (State::GAME_OVER):
-        textboxString = "Game Over!";
-        textPosition = {windowSize.x/2, windowSize.y/2};
-        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::CENTER);
-
+        RenderGameOverScene();
         break;
     }
         
@@ -116,4 +71,78 @@ void Engine::DrawTextBox(Text& _textbox, std::string _text, int _fontSize, Vecto
     }
     _textbox.setPosition(_textPosition.x, _textPosition.y);
     m_Window.draw(_textbox);
+}
+
+void Engine::RenderMainMenu()
+{
+    textboxString = "Zombie Shooter V2";
+    DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE*2, {windowSize.x/2,0}, TextBoxAnchor::TOP_CENTER);
+
+    textboxString = "Press Enter to Start";
+    DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, { windowSize.x/2, windowSize.y/2 });
+
+    m_Window.draw(textbox);
+}
+
+void Engine::RenderGameScene()
+{
+    stringstream ss;
+    Vector2f textPosition = {0,0};
+    textbox.setFillColor(Color::White);
+
+    m_Window.setMouseCursorVisible(false);
+    m_Window.draw(background, &textureBackground);
+    m_Window.draw(player->GetSprite());
+
+    vector<Zombie*> tempZombies = gm->GetZombies();
+    for (size_t i = 0; i < tempZombies.size(); i++)
+    {
+        m_Window.draw(tempZombies[i]->GetSprite());
+        DrawTextBox(textbox, to_string(tempZombies[i]->GetHealth()), MAIN_MENU_CHAR_SIZE/4, tempZombies[i]->GetCharPosition(), TextBoxAnchor::BOTTOM_CENTER);
+    }
+
+    for (size_t i = 0; i < gm->GetBullets().size(); i++)
+    {
+        m_Window.draw(gm->GetBullets()[i]->GetSprite());
+    }
+
+    spriteCrosshair.setPosition(mouseScreenPosition);
+    m_Window.draw(spriteCrosshair);
+
+    ss << fixed << setprecision(2) << m_TimeElapsed;
+    textboxString = ss.str();
+    textPosition = { windowSize.x - ((MAIN_MENU_CHAR_SIZE * textboxString.length())/2), 0};
+    textbox.setFillColor(Color::White);
+    DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
+
+    textboxString = "Health: " + to_string(player->GetHealth());
+    textPosition = {0,0};
+    textbox.setFillColor(Color::Red);
+    DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
+
+    textboxString = "Score: " + to_string(gm->GetScore());
+    textPosition = {0, windowSize.y * 0.98f};
+    textbox.setFillColor(Color::White);
+    DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::BOTTOM_LEFT);
+}
+
+void Engine::RenderGameOverScene()
+{
+    Vector2f textPosition = {0,0};
+    stringstream ss;
+    ss.str("");
+
+    textboxString = "Game Over";
+    textPosition = {windowSize.x/2, windowSize.y/2};
+    textbox.setFillColor(Color::Red);
+    DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, {textPosition.x, textPosition.y - textPosition.y/2}, TextBoxAnchor::CENTER);
+
+    ss << "Your score: " << gm->GetScore() << " points.";
+    textbox.setFillColor(Color::White);
+    DrawTextBox(textbox, ss.str(), MAIN_MENU_CHAR_SIZE/2, textPosition, TextBoxAnchor::CENTER);
+
+    ss.str("");
+    ss << "You survived for: " << fixed << setprecision(2) << m_TimeElapsed << " seconds.";
+    textbox.setFillColor(Color::White);
+    DrawTextBox(textbox, ss.str(), MAIN_MENU_CHAR_SIZE/2, {textPosition.x, textPosition.y + textPosition.y/2}, TextBoxAnchor::CENTER);
 }

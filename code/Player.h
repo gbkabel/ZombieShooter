@@ -11,6 +11,8 @@ class Player : public Character
 private:
 
 	const int HIT_INVINCIBILITY_TIME_MS = 200;
+	const int STARTING_HEALTH = 100;
+	const int STARTING_SPEED = 100;
 
 	bool upPressed;
 	bool downPressed;
@@ -35,7 +37,7 @@ public:
 	void StopRight();
 	void StopUp();
 	void StopDown();
-	bool Update(float elapsedTime);
+	void Update(float elapsedTime);
 };
 
 #endif

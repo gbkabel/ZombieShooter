@@ -18,6 +18,9 @@ public:
     void CheckBullets(float);
     void CheckForCollision(Player*, Time);
     void StartGame();
+    void Reset();
+    void Update(Time);
+    int GetScore();
     vector<Zombie*> GetZombies() const;
     vector<Bullet*> GetBullets() const;
     vector<Pickup*> GetPickups() const;
@@ -26,12 +29,19 @@ public:
 
 private:
     const int NUM_ZOMBIE_TYPES = 2;
-    const int MAX_ZOMBIES_ON_SCREEN = 100;
+    const int NUM_STARTING_ZOMBIES = 15;
+    const size_t MAX_ZOMBIES_ON_SCREEN = 100;
+
+    const int SPAWN_COOLDOWN_AMOUNT = 200;
+    
+    Time lastSpawn;
     Time lastPressed;
+
 	float fireRate = 1;
 	int currentBullet = 0;
     int m_Score = 0;
-    Zombie* GetARandomZombie() const;
+    Zombie* GetARandomZombieType() const;
+    void SpawnNewZombie();
     vector<Zombie*> m_Zombies;
     vector<Bullet*> m_Bullets;
     vector<Pickup*> m_Pickups;

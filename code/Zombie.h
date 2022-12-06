@@ -9,7 +9,6 @@ using namespace sf;
 class Zombie : public Character
 {
 private:
-	void CheckCollisionWithPlayer();
 	bool m_IsAlive;
 protected:
 	int m_Damage;
@@ -17,7 +16,7 @@ protected:
 	void Damage(int);
 public:
 	Zombie(int, int, int, std::string);
-	bool Hit();
+	bool Hit(int);
 	int GetKillValue();
 	int GetDamageValue();
 	bool IsAlive();
