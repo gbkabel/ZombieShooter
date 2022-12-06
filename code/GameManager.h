@@ -13,6 +13,7 @@ class GameManager
 {
 public:
     GameManager(Vector2f);
+    void ShootBullets(Player*, Time);
     void CheckZombies(Player*, float);
     void CheckBullets(float);
     void CheckForCollision(Player*, Time);
@@ -26,7 +27,10 @@ public:
 private:
     const int NUM_ZOMBIE_TYPES = 2;
     const int MAX_ZOMBIES_ON_SCREEN = 100;
-
+    Time lastPressed;
+	float fireRate = 1;
+	int currentBullet = 0;
+	Vector2f mouseWorldPosition;
     int m_Score = 0;
     Zombie* GetARandomZombie() const;
     vector<Zombie*> m_Zombies;

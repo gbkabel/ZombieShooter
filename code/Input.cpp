@@ -1,7 +1,6 @@
 #include "Engine.h"
 #include "ZombieShooter.h"
 
-
 void Engine::Input()
 {
 	IntRect arena;
@@ -89,24 +88,4 @@ void Engine::Input()
 
     // Make a note of the players new position
 	Vector2f playerPosition(player->GetCharPosition());
-	
-	Time lastPressed;
-	float fireRate = 1;
-	Bullet bullets[100];
-	int currentBullet = 0;
-	Vector2f mouseWorldPosition;
-	if (Mouse::isButtonPressed(Mouse::Left))
-	{
-		if (m_TotalGameTime.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate)
-		{
-			bullets[currentBullet].shoot(player->GetCharPosition().x, player->GetCharPosition().y, mouseWorldPosition.x, mouseWorldPosition.y);
-			currentBullet++;
-			if (currentBullet > 99)
-			{
-				currentBullet  = 0;
-			}
-			lastPressed = m_TotalGameTime;
-			
-		}
-	}
 }

@@ -10,9 +10,10 @@ void Engine::Update(float _dt)
         m_TimeElapsed += _dt;
     	if (player->Update(_dt, Mouse::getPosition()))
         {
-            gm->CheckBullets(_dt);
             gm->CheckZombies(player, _dt);
+            gm->ShootBullets(player, m_TotalGameTime);
             gm->CheckForCollision(player, m_TotalGameTime);
+            gm->CheckBullets(_dt);
         }
         else state = State::GAME_OVER;
     }

@@ -57,7 +57,7 @@ void Bullet::shoot(float startX, float startY,
 	m_MaxY = startY + range;
 	
 	// Position the bullet ready to be drawn
-	m_BulletShape.setPosition(m_Position);
+	m_Sprite.setPosition(m_Position);
 }
 
 void Bullet::stop()

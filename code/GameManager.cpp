@@ -1,4 +1,6 @@
 #include "GameManager.h"
+#include "Engine.h"
+#include "Bullet.h"
 #include <random>
 
 using namespace std;
@@ -6,6 +8,24 @@ using namespace std;
 GameManager::GameManager(Vector2f _arenaSize)
 {
     m_ArenaSize = _arenaSize;
+}
+
+void GameManager::ShootBullets(Player* _player, Time m_TotalGameTime)
+{
+	if (Mouse::isButtonPressed(Mouse::Left))
+	{
+		if (m_TotalGameTime.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate)
+		{
+			m_Bullets[currentBullet]->shoot(_player->GetCharPosition().x, _player->GetCharPosition().y, mouseWorldPosition.x, mouseWorldPosition.y);
+			currentBullet++;
+			if (currentBullet > 99)
+			{
+				currentBullet  = 0;
+			}
+			lastPressed = m_TotalGameTime;
+			
+		}
+	}
 }
 
 void GameManager::CheckZombies(Player* _player, float _dtAsSeconds)
