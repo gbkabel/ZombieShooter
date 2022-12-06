@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "TextureHolder.h"
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -12,6 +13,12 @@ void Engine::Draw()
     m_Window.clear();
     m_Window.setView(m_MainView);
     m_Window.setView(m_HudView);    
+    Vector2f mouseWorldPosition;
+    m_Window.setMouseCursorVisible(false);
+	Sprite spriteCrosshair;
+	Texture textureCrosshair = TextureHolder::GetTexture("graphics/crosshair1.png");
+	spriteCrosshair.setTexture(textureCrosshair);
+	spriteCrosshair.setOrigin(25, 25);
 
     switch (state)
     {
@@ -28,7 +35,9 @@ void Engine::Draw()
     case (State::PLAYING):
         m_Window.draw(background, &textureBackground);
         m_Window.draw(player->GetSprite());
-        
+        mouseWorldPosition = m_Window.mapPixelToCoords(Mouse::getPosition(), m_HudView);
+        spriteCrosshair.setPosition(mouseWorldPosition);
+        m_Window.draw(spriteCrosshair);
         for (size_t i = 0; i < gm->GetZombies().size(); i++)
         {
             m_Window.draw(gm->GetZombies()[i]->GetSprite());
