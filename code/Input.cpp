@@ -45,7 +45,7 @@ void Engine::Input()
 
     
 	// Where is the mouse pointer
-	mouseScreenPosition = Mouse::getPosition();
+	mouseScreenPosition = m_Window.mapPixelToCoords(Mouse::getPosition(), m_HudView);
 
 	// Convert mouse position to world coordinates of mainView
 	//mouseWorldPosition = window.mapPixelToCoords(Mouse::getPosition(), main_view);

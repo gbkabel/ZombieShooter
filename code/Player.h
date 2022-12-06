@@ -35,7 +35,7 @@ public:
 	void StopRight();
 	void StopUp();
 	void StopDown();
-	bool Update(float elapsedTime, Vector2i mousePosition);
+	bool Update(float elapsedTime);
 };
 
 #endif

@@ -52,7 +52,7 @@ void Player::Spawn(int _startPositionX, int _startPositionY)
     this->SetPosition({(float)_startPositionX, (float)_startPositionY});	
 }
 
-bool Player::Update(float elapsedTime, Vector2i mousePosition)
+bool Player::Update(float elapsedTime)
 {
 	if (m_Health <= 0) return false;
 

@@ -14,18 +14,13 @@ void GameManager::ShootBullets(Player* _player, Time m_TotalGameTime)
 {
 	if (Mouse::isButtonPressed(Mouse::Left))
 	{
-		if (m_TotalGameTime.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate)
+		if (m_TotalGameTime.asMilliseconds() - lastPressed.asMilliseconds() > 100 / fireRate)
 		{
             Bullet* newBullet = new Bullet();
+            newBullet->shoot(_player->GetCharPosition().x, _player->GetCharPosition().y, mouseWorldPosition.x, mouseWorldPosition.y);
             m_Bullets.push_back(newBullet);
-			m_Bullets[currentBullet]->shoot(_player->GetCharPosition().x, _player->GetCharPosition().y, mouseWorldPosition.x, mouseWorldPosition.y);
-			currentBullet++;
-			if (currentBullet > 99)
-			{
-				currentBullet  = 0;
-			}
+
 			lastPressed = m_TotalGameTime;
-			
 		}
 	}
 }
@@ -61,12 +56,13 @@ void GameManager::CheckForCollision(Player* _player, Time _timeHit)
                         //Stop the bullet
                         m_Bullets[i]->stop();
 
-                        if (m_Zombies[i]->Hit())
+                        if (m_Zombies[j]->Hit())
                         {
-                            m_Score += m_Zombies[i]->GetKillValue();
+                            m_Score += m_Zombies[j]->GetKillValue();
                         }
                         
-                        m_Zombies.erase(m_Zombies.begin() + i);
+                        m_Zombies.erase(m_Zombies.begin() + j);
+                        m_Bullets.erase(m_Bullets.begin() + i);
                     }
                 }
         }

@@ -11,8 +11,8 @@ void Engine::Draw()
 
     //Clear previous frame
     m_Window.clear();
-    m_Window.setView(m_MainView);
-    m_Window.setView(m_HudView);    
+    //m_Window.setView(m_MainView);
+    //m_Window.setView(m_HudView);    
     Vector2f mouseWorldPosition;
     m_Window.setMouseCursorVisible(false);
 	Sprite spriteCrosshair;
@@ -36,12 +36,14 @@ void Engine::Draw()
         m_Window.draw(background, &textureBackground);
 
         textboxString = "Health: " + to_string(player->GetHealth());
-        textPosition = { player->GetCharPosition().x, player->GetCharPosition().y };
-        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_CENTER);
+        textPosition = {0,0};
+        textBox.setFillColor(Color::Red);
+        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
 
         m_Window.draw(player->GetSprite());
-        mouseWorldPosition = m_Window.mapPixelToCoords(Mouse::getPosition(), m_HudView);
-        spriteCrosshair.setPosition(mouseWorldPosition);
+        
+        spriteCrosshair.setPosition(mouseScreenPosition);
+        
         m_Window.draw(spriteCrosshair);
         for (size_t i = 0; i < gm->GetZombies().size(); i++)
         {
@@ -56,7 +58,12 @@ void Engine::Draw()
         ss << fixed << setprecision(2) << m_TimeElapsed;
         textboxString = ss.str();
         textPosition = { windowSize.x - ((MAIN_MENU_CHAR_SIZE * textboxString.length())/2), 0};
+        textBox.setFillColor(Color::White);
         DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
+
+        textboxString = "X: " + to_string((int)mouseScreenPosition.x) + " Y: " + to_string((int)mouseScreenPosition.y);
+        textPosition = {mouseScreenPosition.x, mouseScreenPosition.y};
+        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE/2, textPosition, TextBoxAnchor::CENTER);
         break;
         
     case (State::PAUSED):

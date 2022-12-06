@@ -45,7 +45,7 @@ class Engine
         View m_HudView;
 
 	    Time m_TotalGameTime;
-    	Vector2i mouseScreenPosition;
+    	Vector2f mouseScreenPosition;
 
         Sprite m_BackgroundSprite;
         Texture m_BackgroundTexture;

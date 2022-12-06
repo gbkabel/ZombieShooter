@@ -8,7 +8,7 @@ void Engine::Update(float _dt)
     if (state == State::PLAYING)
     {
         m_TimeElapsed += _dt;
-    	if (player->Update(_dt, Mouse::getPosition()))
+    	if (player->Update(_dt))
         {
             gm->CheckZombies(player, _dt);
             gm->ShootBullets(player, m_TotalGameTime);
