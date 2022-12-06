@@ -9,19 +9,11 @@ Pickup::Pickup()
 	if (m_Type == 1)
 	{
 		m_Sprite = Sprite(TextureHolder::GetTexture(
-			"graphics/health_pickup.png"));
+			"graphics/health.png"));
 
 		// How much is pickup worth
 		m_Value = HEALTH_START_VALUE;
 
-	}
-	else
-	{
-		m_Sprite = Sprite(TextureHolder::GetTexture(
-			"graphics/ammo_pickup.png"));
-
-		// How much is pickup worth
-		m_Value = AMMO_START_VALUE;
 	}
 
 	m_Sprite.setOrigin(25, 25);
