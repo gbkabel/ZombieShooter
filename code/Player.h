@@ -21,11 +21,12 @@ private:
 	void DetermineMoveDirection();
 	
 public:
-	Player(int, int, int);
+	Player(int, int, int, std::string);
 	void Spawn(int, int) override;
 	void Heal(int);
 	bool Hit(Time, int);
 	Time GetLastHitTime();
+	int GetHealth();
 	void MoveLeft();
 	void MoveRight();
 	void MoveUp();
@@ -34,7 +35,7 @@ public:
 	void StopRight();
 	void StopUp();
 	void StopDown();
-	void Update(float elapsedTime, Vector2i mousePosition);
+	bool Update(float elapsedTime, Vector2i mousePosition);
 };
 
 #endif

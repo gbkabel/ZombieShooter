@@ -34,6 +34,11 @@ void Engine::Draw()
         
     case (State::PLAYING):
         m_Window.draw(background, &textureBackground);
+
+        textboxString = "Health: " + to_string(player->GetHealth());
+        textPosition = { player->GetCharPosition().x, player->GetCharPosition().y };
+        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_CENTER);
+
         m_Window.draw(player->GetSprite());
         mouseWorldPosition = m_Window.mapPixelToCoords(Mouse::getPosition(), m_HudView);
         spriteCrosshair.setPosition(mouseWorldPosition);
@@ -41,6 +46,11 @@ void Engine::Draw()
         for (size_t i = 0; i < gm->GetZombies().size(); i++)
         {
             m_Window.draw(gm->GetZombies()[i]->GetSprite());
+        }
+
+        for (size_t i = 0; i < gm->GetBullets().size(); i++)
+        {
+            m_Window.draw(gm->GetBullets()[i]->GetSprite());
         }
 
         ss << fixed << setprecision(2) << m_TimeElapsed;
@@ -53,6 +63,10 @@ void Engine::Draw()
         break;
         
     case (State::GAME_OVER):
+        textboxString = "Game Over!";
+        textPosition = {windowSize.x/2, windowSize.y/2};
+        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::CENTER);
+
         break;
     }
         

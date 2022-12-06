@@ -1,10 +1,9 @@
 #include "Pickup.h"
-#include "TextureHolder.h"
 
-Pickup::Pickup(int type)
+Pickup::Pickup()
 {
 	// Store the type of this pickup
-	m_Type = type;
+	m_Type = 0;
 
 	// Associate the texture with the sprite
 	if (m_Type == 1)
@@ -30,6 +29,7 @@ Pickup::Pickup(int type)
 	m_SecondsToLive = START_SECONDS_TO_LIVE;
 	m_SecondsToWait = START_WAIT_TIME;
 }
+
 
 void Pickup::setArena(IntRect arena)
 {

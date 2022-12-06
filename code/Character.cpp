@@ -1,9 +1,15 @@
 #include "Character.h"
 
-Character::Character(int _health)
+Character::Character(int _arenaX, int _arenaY, int _health, std::string _path = "")
 {
     this->m_MaxHealth = _health;
     this->m_Health = _health;
+
+	m_ArenaSize = { _arenaX, _arenaY };
+
+	LoadAndSetTextureFromFile(_path);
+	SetSpriteOrigin({ m_Sprite.getLocalBounds().width / 2, m_Sprite.getLocalBounds().height / 2});
+	SetPosition({-m_Sprite.getLocalBounds().width, -m_Sprite.getLocalBounds().height});
 }
 
 void Character::LoadAndSetTextureFromFile(std::string _path)

@@ -30,7 +30,7 @@ class Engine
 	    State state = State::MAIN_MENU;
 
         float m_WindowScale = 0.8f;
-        float m_TimeElapsed = 0;
+        float m_TimeElapsed;
 
     	Player* player;
         GameManager* gm;
@@ -44,7 +44,7 @@ class Engine
         View m_MainView;
         View m_HudView;
 
-	    Time gameTimeTotal;
+	    Time m_TotalGameTime;
     	Vector2i mouseScreenPosition;
 
         Sprite m_BackgroundSprite;
@@ -53,7 +53,7 @@ class Engine
 
 
         void Input();
-        void Update(float dtAsSeconds);
+        void Update(float dt);
         void Draw();
 
         void DrawTextBox(Text& _textbox, string _text, int _fontSize, Vector2f _textPosition, TextBoxAnchor originPoint = TextBoxAnchor::CENTER);

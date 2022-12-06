@@ -1,17 +1,14 @@
 #include "Zombie.h"
 
-Zombie::Zombie(int _arenaX, int _arenaY, int _health) : Character(_health)
+Zombie::Zombie(int _arenaX, int _arenaY, int _health, std::string _path) : Character(_arenaX, _arenaY, _health, _path)
 {
-	LoadAndSetTextureFromFile("graphics/zombie1.png");
-	SetSpriteOrigin({ m_Sprite.getLocalBounds().width / 2, m_Sprite.getLocalBounds().height / 2});
-	SetPosition({-m_Sprite.getLocalBounds().width, -m_Sprite.getLocalBounds().height});
-	m_ArenaSize = { _arenaX, _arenaY };
-	m_Speed = 50;
+	
 }
 
 void Zombie::Spawn(int _startX, int _startY)
 {
-	SetPosition({_startX, _startY});
+	SetPosition({(float)_startX, (float)_startY});
+	m_IsAlive = true;
 }
 
 void Zombie::Update(Vector2f _coords, float _elapsedTime)
@@ -34,13 +31,50 @@ void Zombie::Update(Vector2f _coords, float _elapsedTime)
 	}
 
 	Vector2f desiredDirection = {m_CharPosition.x, m_CharPosition.y};
-	desiredDirection += {normalizedDirection.x * m_Speed * _elapsedTime, normalizedDirection.y * m_Speed * _elapsedTime};
+	desiredDirection.x += normalizedDirection.x * m_Speed * _elapsedTime;
+	desiredDirection.y += normalizedDirection.y * m_Speed * _elapsedTime;
 
 
 	SetPosition(desiredDirection);
 
-	//Move the player and set sprite scale (which way its facing)
+	//Move the Zombie and set sprite scale (which way its facing)
 	m_Sprite.setScale(m_SpriteHDirection, 1);
 	
 	ValidateCollision(); //Check collision
+	CheckCollisionWithPlayer();
+}
+
+void Zombie::CheckCollisionWithPlayer()
+{
+
+}
+
+int Zombie::GetKillValue()
+{
+	return m_KillScoreValue;
+}
+
+bool Zombie::IsAlive()
+{
+	return m_IsAlive;
+}
+
+bool Zombie::Hit()
+{
+	m_Health--;
+
+	if (m_Health < 0)
+	{
+		m_IsAlive = false;
+
+		m_MainTexture.loadFromFile("graphics/bloodPool1.png");
+		m_Sprite.setTexture(m_MainTexture);
+	}
+
+	return !m_IsAlive;
+}
+
+int Zombie::GetDamageValue()
+{
+	return m_Damage;
 }

@@ -11,6 +11,9 @@ private:
 	// Where is the bullet?
 	Vector2f m_Position;
 
+	Texture m_MainTexture;
+	Sprite m_Sprite;
+
 	// What each bullet looks like
 	RectangleShape m_BulletShape;
 
@@ -53,6 +56,8 @@ public:
 
 	// Tell the calling code where the bullet is in the world
 	FloatRect getPosition();
+
+    Sprite GetSprite() const;
 
 	// Return the actual shape (for drawing)
 	RectangleShape getShape();

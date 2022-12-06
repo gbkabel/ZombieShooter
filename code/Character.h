@@ -19,7 +19,7 @@ protected:
     void SetSpeed(float);
 
 public:
-    Character(int);
+    Character(int, int, int, std::string);
 	void ValidateCollision();
     void LoadAndSetTextureFromFile(std::string);
     void SetSpriteOrigin(Vector2f);

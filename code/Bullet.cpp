@@ -4,6 +4,9 @@
 Bullet::Bullet()
 {
 	m_BulletShape.setSize(sf::Vector2f(2, 2));
+
+	m_MainTexture.loadFromFile("graphics/bullet1.png");
+	m_Sprite.setTexture(m_MainTexture);
 }
 
 void Bullet::shoot(float startX, float startY,
@@ -94,4 +97,9 @@ void Bullet::update(float elapsedTime)
 		m_InFlight = false;
 	}
 
+}
+
+Sprite Bullet::GetSprite() const
+{
+	return m_Sprite;
 }

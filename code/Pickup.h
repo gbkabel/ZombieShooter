@@ -1,6 +1,8 @@
-#ifndef PICKUP_H
-#define PICKUP_H
+#pragma once
 #include <SFML/Graphics.hpp>
+#include "Player.h"
+#include "TextureHolder.h"
+
 
 using namespace sf;
 
@@ -35,8 +37,9 @@ private:
 
 	// Public prototypes go here
 public:
-
-	Pickup(int type);
+	Pickup();
+	
+	virtual void Obtain(Player*) = 0;
 
 	// Prepare a new pickup
 	void setArena(IntRect arena);
@@ -62,5 +65,3 @@ public:
 	void upgrade();
 
 };
-
-#endif

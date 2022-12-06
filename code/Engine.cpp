@@ -3,8 +3,9 @@
 
 Engine::Engine()
 {
-	player = new Player(100, windowSize.x, windowSize.y);
+	player = new Player(windowSize.x, windowSize.y, 100, "graphics/shooter1.png");
     gm = new GameManager({windowSize.x, windowSize.y});
+    
     m_Window.create(VideoMode(windowSize.x, windowSize.y), "Zombie Shooter V2");
     m_MainView.setSize(windowSize);
     m_HudView.reset(FloatRect(0,0, windowSize.x, windowSize.y));
@@ -20,13 +21,10 @@ void Engine::Run()
     while (m_Window.isOpen())
     {
         Time dt = clock.restart();
-        gameTimeTotal += dt;
-
-        // Make a decimal fraction of 1 from the delta time
-        float dtAsSeconds = dt.asSeconds();
+        m_TotalGameTime += dt;
 
         Input();
-        Update(dtAsSeconds);
+        Update(dt.asSeconds());
         Draw();
 	}
 }

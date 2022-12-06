@@ -2,13 +2,9 @@
 #include <iostream>
 
 
-Player::Player(int startingHealth, int arenaX, int arenaY) : Character(startingHealth)
+Player::Player(int _arenaX, int _arenaY, int _startingHealth, std::string _path) : Character(_arenaX,_arenaY, _startingHealth, _path)
 {
-	LoadAndSetTextureFromFile("graphics/shooter1.png");
-	SetSpriteOrigin({m_Sprite.getLocalBounds().width/2, m_Sprite.getLocalBounds().height/2});
-	SetPosition({-m_Sprite.getLocalBounds().width, -m_Sprite.getLocalBounds().height});
-	//Initialize the Player in the top right corner of the world, just off screen
-	m_ArenaSize = {arenaX, arenaY};
+	m_Speed = 100;
 }
 
 
@@ -56,8 +52,10 @@ void Player::Spawn(int _startPositionX, int _startPositionY)
     this->SetPosition({(float)_startPositionX, (float)_startPositionY});	
 }
 
-void Player::Update(float elapsedTime, Vector2i mousePosition)
+bool Player::Update(float elapsedTime, Vector2i mousePosition)
 {
+	if (m_Health <= 0) return false;
+
 	DetermineMoveDirection(); //Check Input
 
 	Vector2f desiredDirection = {m_CharPosition.x, m_CharPosition.y};
@@ -70,6 +68,7 @@ void Player::Update(float elapsedTime, Vector2i mousePosition)
 	m_Sprite.setScale(m_SpriteHDirection, 1);
 	
 	ValidateCollision(); //Check collision
+	return true;
 }
 
 void Player::DetermineMoveDirection()
@@ -105,6 +104,7 @@ bool Player::Hit(Time timeHit, int damage)
 	{
 		m_LastHit = timeHit;
 		m_Health -= damage;
+		if (m_Health < 0) m_Health = 0;
 		return true;
 	}
 	else return false;
@@ -114,4 +114,9 @@ void Player::Heal(int amount)
 {
 	m_Health += amount;
 	if (m_Health > m_MaxHealth) m_Health = m_MaxHealth;
+}
+
+int Player::GetHealth()
+{
+	return m_Health;
 }

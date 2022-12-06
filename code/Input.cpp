@@ -26,15 +26,14 @@ void Engine::Input()
 					arena.left = 0;
 					arena.top = 0;
 
-					int tileSize = CreateBackground(background, arena);
-					Zombie* zombie = new Zombie(100, arena.width, arena.height);
-					zombie->Spawn(windowSize.x/4, windowSize.y/4);
+					//int tileSize = 
+					CreateBackground(background, arena);
 					gm->StartGame();
 					
 
 					state = State::PLAYING;
 					player->Spawn(windowSize.x/2, windowSize.y/2);
-					//zombie->Spawn(windowSize.x, windowSize.y);
+
 					clock.restart();
 					}
 				}
