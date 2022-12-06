@@ -39,6 +39,11 @@ void GameManager::CheckBullets(float _dtAsSeconds)
     for (size_t i = 0; i < m_Bullets.size(); i++)
     {
         if (m_Bullets[i]->isInFlight()) m_Bullets[i]->update(_dtAsSeconds);
+        else 
+        {
+            delete m_Bullets[i];
+            m_Bullets.erase(m_Bullets.begin() + i);
+        }
     }
 }
 
@@ -61,7 +66,10 @@ void GameManager::CheckForCollision(Player* _player, Time _timeHit)
                             m_Score += m_Zombies[j]->GetKillValue();
                         }
                         
+                        delete m_Zombies[j];
                         m_Zombies.erase(m_Zombies.begin() + j);
+
+                        delete m_Bullets[i];
                         m_Bullets.erase(m_Bullets.begin() + i);
                     }
                 }
