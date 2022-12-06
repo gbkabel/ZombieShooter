@@ -16,6 +16,8 @@ void GameManager::ShootBullets(Player* _player, Time m_TotalGameTime)
 	{
 		if (m_TotalGameTime.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate)
 		{
+            Bullet* newBullet = new Bullet();
+            m_Bullets.push_back(newBullet);
 			m_Bullets[currentBullet]->shoot(_player->GetCharPosition().x, _player->GetCharPosition().y, mouseWorldPosition.x, mouseWorldPosition.y);
 			currentBullet++;
 			if (currentBullet > 99)
