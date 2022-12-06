@@ -3,8 +3,6 @@
 // The constructor
 Bullet::Bullet()
 {
-	m_BulletShape.setSize(sf::Vector2f(2, 2));
-
 	m_MainTexture.loadFromFile("graphics/bullet1.png");
 	m_Sprite.setTexture(m_MainTexture);
 }
@@ -17,33 +15,17 @@ void Bullet::shoot(float startX, float startY,
 	m_Position.x = startX;
 	m_Position.y = startY;
 
-	// Calculate the gradient of the flight path
-	float gradient = (startX - targetX) / (startY - targetY);
+	Vector2f rawDirection = {targetX - startX, targetY - startY};
 
-	// Any gradient less than zero needs to be negative
-	/*if (gradient < 0)
-	{
-		gradient *= -1;
-	}
-	*/
-
-	// Calculate the ratio between x and t
-	float ratioXY = m_BulletSpeed / (1 + gradient);
-
-	// Set the "speed" horizontally and vertically
-	m_BulletDistanceY = ratioXY;
-	m_BulletDistanceX = ratioXY * gradient;
 	
-	// Point the bullet in the right direction
-	if (targetX < startX)
+
+	//Normalize Input vector so that the magnitude is always 1
+	if (abs(rawDirection.x) > 0 || abs(rawDirection.y) > 0)
 	{
-		m_BulletDistanceX *= -1;
+		float m = sqrt((rawDirection.x * rawDirection.x) + (rawDirection.y * rawDirection.y));
+		m_DirectionOfTravel = { rawDirection.x / m, rawDirection.y / m};
 	}
 
-	if (targetY < startY)
-	{
-		m_BulletDistanceY *= -1;
-	}
 
 	// Finally, assign the results to the
 	// member variables
@@ -73,23 +55,18 @@ bool Bullet::isInFlight()
 
 FloatRect Bullet::getPosition()
 {
-	return m_BulletShape.getGlobalBounds();
-}
-
-RectangleShape Bullet::getShape()
-{
-	return m_BulletShape;
+	return m_Sprite.getGlobalBounds();
 }
 
 
 void Bullet::update(float elapsedTime)
 {
 	// Update the bullet position variables
-	m_Position.x += m_BulletDistanceX * elapsedTime;
-	m_Position.y += m_BulletDistanceY * elapsedTime;
+	m_Position.x += m_DirectionOfTravel.x * m_BulletSpeed * elapsedTime;
+	m_Position.y += m_DirectionOfTravel.y * m_BulletSpeed * elapsedTime;
 
 	// Move the bullet
-	m_BulletShape.setPosition(m_Position);
+	m_Sprite.setPosition(m_Position);
 
 	// Has the bullet gone out of range?
 	if (m_Position.x < m_MinX || m_Position.x > m_MaxX ||

@@ -35,14 +35,10 @@ void Engine::Draw()
     case (State::PLAYING):
         m_Window.draw(background, &textureBackground);
 
-        textboxString = "Health: " + to_string(player->GetHealth());
-        textPosition = {0,0};
-        textBox.setFillColor(Color::Red);
-        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
-
         m_Window.draw(player->GetSprite());
-        
+
         spriteCrosshair.setPosition(mouseScreenPosition);
+
         
         m_Window.draw(spriteCrosshair);
         for (size_t i = 0; i < gm->GetZombies().size(); i++)
@@ -55,15 +51,18 @@ void Engine::Draw()
             m_Window.draw(gm->GetBullets()[i]->GetSprite());
         }
 
+
         ss << fixed << setprecision(2) << m_TimeElapsed;
         textboxString = ss.str();
         textPosition = { windowSize.x - ((MAIN_MENU_CHAR_SIZE * textboxString.length())/2), 0};
         textBox.setFillColor(Color::White);
         DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
 
-        textboxString = "X: " + to_string((int)mouseScreenPosition.x) + " Y: " + to_string((int)mouseScreenPosition.y);
-        textPosition = {mouseScreenPosition.x, mouseScreenPosition.y};
-        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE/2, textPosition, TextBoxAnchor::CENTER);
+        textboxString = "Health: " + to_string(player->GetHealth());
+        textPosition = {0,0};
+        textBox.setFillColor(Color::Red);
+        DrawTextBox(textBox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
+
         break;
         
     case (State::PAUSED):

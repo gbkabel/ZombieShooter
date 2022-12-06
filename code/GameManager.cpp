@@ -10,17 +10,17 @@ GameManager::GameManager(Vector2f _arenaSize)
     m_ArenaSize = _arenaSize;
 }
 
-void GameManager::ShootBullets(Player* _player, Time m_TotalGameTime)
+void GameManager::ShootBullets(Player* _player, Vector2f _direction, Time _totalGameTime)
 {
 	if (Mouse::isButtonPressed(Mouse::Left))
 	{
-		if (m_TotalGameTime.asMilliseconds() - lastPressed.asMilliseconds() > 100 / fireRate)
+		if (_totalGameTime.asMilliseconds() - lastPressed.asMilliseconds() > 100 / fireRate)
 		{
             Bullet* newBullet = new Bullet();
-            newBullet->shoot(_player->GetCharPosition().x, _player->GetCharPosition().y, mouseWorldPosition.x, mouseWorldPosition.y);
+            newBullet->shoot(_player->GetCharPosition().x, _player->GetCharPosition().y, _direction.x, _direction.y);
             m_Bullets.push_back(newBullet);
 
-			lastPressed = m_TotalGameTime;
+			lastPressed = _totalGameTime;
 		}
 	}
 }

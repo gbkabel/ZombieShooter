@@ -2,6 +2,7 @@
 #define BULLET_H
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 using namespace sf;
 
@@ -11,11 +12,10 @@ private:
 	// Where is the bullet?
 	Vector2f m_Position;
 
+	Vector2f m_DirectionOfTravel;
+
 	Texture m_MainTexture;
 	Sprite m_Sprite;
-
-	// What each bullet looks like
-	RectangleShape m_BulletShape;
 
 	// Is this bullet currently whizzing through the air
 	bool m_InFlight = false;
