@@ -97,7 +97,7 @@ void Engine::Input()
 	Vector2f mouseWorldPosition;
 	if (Mouse::isButtonPressed(Mouse::Left))
 	{
-		if (m_TotalGameTime.asMilliseconds() - lastPressed.asMilliseconds > 1000 / fireRate)
+		if (m_TotalGameTime.asMilliseconds() - lastPressed.asMilliseconds() > 1000 / fireRate)
 		{
 			bullets[currentBullet].shoot(player->GetCharPosition().x, player->GetCharPosition().y, mouseWorldPosition.x, mouseWorldPosition.y);
 			currentBullet++;
