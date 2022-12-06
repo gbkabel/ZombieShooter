@@ -98,7 +98,6 @@ void Engine::RenderGameScene()
     for (size_t i = 0; i < tempZombies.size(); i++)
     {
         m_Window.draw(tempZombies[i]->GetSprite());
-        DrawTextBox(textbox, to_string(tempZombies[i]->GetHealth()), MAIN_MENU_CHAR_SIZE/4, tempZombies[i]->GetCharPosition(), TextBoxAnchor::BOTTOM_CENTER);
     }
 
     for (size_t i = 0; i < gm->GetBullets().size(); i++)
