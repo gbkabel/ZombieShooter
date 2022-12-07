@@ -1,6 +1,4 @@
 #include "Weapon.h"
-#include <cmath>
-#include <iostream>
 
 Weapon::Weapon()
 {
@@ -12,7 +10,6 @@ Weapon::Weapon()
 void Weapon::Update(Vector2f _playerCoords, Vector2f _mouseCoords)
 {
     Vector2f rawDirection = {_mouseCoords.x - _playerCoords.x, _mouseCoords.y - _playerCoords.y};
-
     float angle = atan2(rawDirection.y, rawDirection.x);
     if (angle >= 1.5 || angle <= -1.5) m_Sprite.setScale(1, -1);
     else m_Sprite.setScale(1,1);
