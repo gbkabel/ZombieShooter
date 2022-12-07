@@ -5,20 +5,19 @@
 #include "TextureHolder.h"
 #include "Player.h"
 #include "Zombie.h"
-#include <vector>
 #include "GameManager.h"
 #include "Weapon.h"
+#include <vector>
 
 using namespace std;
 using namespace sf;
 
 class Engine
 {
-    public:
-        Engine();
+public:
+	Engine();
         void Run();
-
-    private:
+private:
         const int TILE_SIZE = 50;
         const int VERTS_IN_QUAD = 4;
         Vector2f windowSize = {640, 368};
@@ -56,7 +55,6 @@ class Engine
 
         string textboxString = "Debug";
         Weapon weapon;
-
 
         void Input();
         void Update(float dt);
