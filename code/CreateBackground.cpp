@@ -2,6 +2,7 @@
 
 int CreateBackground(VertexArray& rVA, IntRect arena)
 {
+    // Initialize our tiles for the background
     const int TILE_SIZE = 16;
     const int TILE_TYPES = 3;
     const int VERTS_IN_QUAD = 4;
@@ -10,7 +11,6 @@ int CreateBackground(VertexArray& rVA, IntRect arena)
     int worldHeight = arena.height / TILE_SIZE;
 
     rVA.setPrimitiveType(Quads);
-
     rVA.resize(worldWidth * worldHeight * VERTS_IN_QUAD);
 
     int currentVertex = 0;
@@ -44,10 +44,8 @@ int CreateBackground(VertexArray& rVA, IntRect arena)
                 rVA[currentVertex + 2].texCoords = Vector2f(TILE_SIZE, TILE_SIZE+ verticalOffset);
                 rVA[currentVertex + 3].texCoords = Vector2f(0, TILE_SIZE+ verticalOffset);
             }
-
             currentVertex = currentVertex + VERTS_IN_QUAD;
         }
     }
-
     return TILE_SIZE;
 }
