@@ -4,12 +4,106 @@
 #include <random>
 
 // Private Functions
+Zombie* GameManager::GetARandomZombieType() const
+{
+    int r = rand() % NUM_ZOMBIE_TYPES;
+    Zombie* newZombie = nullptr;
+    switch (r)
+    {
+        case 0:
+            newZombie =  new NormalZombie(m_ArenaSize.x, m_ArenaSize.y, "graphics/normalZombie1.png");
+            break;
+        case 1:
+            newZombie = new CrawlerZombie(m_ArenaSize.x, m_ArenaSize.y, "graphics/crawlerZombie1.png");
+            break;
+    }
+    return newZombie;
+}
+
+void GameManager::SpawnNewZombie()
+{
+    Zombie* newZombie;
+    Vector2i randomSpawn;
+
+    newZombie = GetARandomZombieType();
+
+    //pick a side of the arena
+    int side = (rand() % 4); //0 is the Top side, going clockwise
+    switch (side)
+    {
+    case 0: //Up
+        randomSpawn = { rand() % (int)m_ArenaSize.x, -(int)newZombie->GetSpriteGlobalBounds().height};
+        break;
+    case 1: //Right
+        randomSpawn = {(int)m_ArenaSize.x + (int)newZombie->GetSpriteGlobalBounds().width, rand() % (int)m_ArenaSize.y };
+        break;
+    case 2: //Down
+        randomSpawn = { rand() % (int)m_ArenaSize.x, (int)m_ArenaSize.y + (int)newZombie->GetSpriteGlobalBounds().height};
+        break;
+    case 3: //Left
+        randomSpawn = {-(int)newZombie->GetSpriteGlobalBounds().width, rand() % (int)m_ArenaSize.y };
+        break;
+    }
+
+    newZombie->Spawn(randomSpawn.x, randomSpawn.y);
+    m_Zombies.push_back(newZombie);
+}
 
 // Public Functions
 GameManager::GameManager(Vector2f _arenaSize)
 {
     m_ArenaSize = _arenaSize;
     srand(420);
+}
+
+void GameManager::StartGame()
+{
+    m_Score = 0;
+    for (int i = 0; i < NUM_STARTING_ZOMBIES; i++)
+    {
+        SpawnNewZombie();
+    }
+}
+
+void GameManager::Update(Time _gameTime)
+{
+    if (m_Zombies.size() < MAX_ZOMBIES_ON_SCREEN && _gameTime.asMilliseconds() - lastSpawn.asMilliseconds() > SPAWN_COOLDOWN_AMOUNT)
+    {
+        SpawnNewZombie();
+        lastSpawn = _gameTime;
+    }
+}
+
+int GameManager::GetScore() const
+{
+    return m_Score;
+}
+
+
+void GameManager::Reset()
+{
+    for (size_t i = 0; i < m_Zombies.size(); i++)
+    {
+        delete m_Zombies[i];
+    }
+    m_Zombies.clear();
+
+    for (size_t i = 0; i < m_Bullets.size(); i++)
+    {
+        delete m_Bullets[i];
+    }
+    m_Bullets.clear();
+}
+
+void GameManager::CheckZombies(Player* _player, float _dtAsSeconds)
+{
+    for (size_t i = 0; i < m_Zombies.size(); i++)
+    {
+        if (m_Zombies[i]->IsAlive())
+	{
+            m_Zombies[i]->Update(_player->GetCharPosition(), _dtAsSeconds);
+	}
+    }
 }
 
 void GameManager::ShootBullets(Player* _player, Vector2f _direction, Time _totalGameTime)
@@ -24,17 +118,6 @@ void GameManager::ShootBullets(Player* _player, Vector2f _direction, Time _total
 		lastPressed = _totalGameTime;
 		}
 	}
-}
-
-void GameManager::CheckZombies(Player* _player, float _dtAsSeconds)
-{
-    for (size_t i = 0; i < m_Zombies.size(); i++)
-    {
-        if (m_Zombies[i]->IsAlive())
-	{
-            m_Zombies[i]->Update(_player->GetCharPosition(), _dtAsSeconds);
-	}
-    }
 }
 
 void GameManager::CheckBullets(float _dtAsSeconds)
@@ -110,87 +193,4 @@ vector<Zombie*> GameManager::GetZombies() const
 vector<Bullet*> GameManager::GetBullets() const
 {
     return m_Bullets;
-}
-
-void GameManager::StartGame()
-{
-    m_Score = 0;
-    for (int i = 0; i < NUM_STARTING_ZOMBIES; i++)
-    {
-        SpawnNewZombie();
-    }
-}
-
-Zombie* GameManager::GetARandomZombieType() const
-{
-    int r = rand() % NUM_ZOMBIE_TYPES;
-    Zombie* newZombie = nullptr;
-    switch (r)
-    {
-        case 0:
-            newZombie =  new NormalZombie(m_ArenaSize.x, m_ArenaSize.y, "graphics/normalZombie1.png");
-            break;
-        case 1:
-            newZombie = new CrawlerZombie(m_ArenaSize.x, m_ArenaSize.y, "graphics/crawlerZombie1.png");
-            break;
-    }
-    return newZombie;
-}
-
-int GameManager::GetScore()
-{
-    return m_Score;
-}
-
-void GameManager::Update(Time _gameTime)
-{
-    if (m_Zombies.size() < MAX_ZOMBIES_ON_SCREEN && _gameTime.asMilliseconds() - lastSpawn.asMilliseconds() > SPAWN_COOLDOWN_AMOUNT)
-    {
-        SpawnNewZombie();
-        lastSpawn = _gameTime;
-    }
-}
-
-void GameManager::SpawnNewZombie()
-{
-    Zombie* newZombie;
-    Vector2i randomSpawn;
-
-    newZombie = GetARandomZombieType();
-
-    //pick a side of the arena
-    int side = (rand() % 4); //0 is the Top side, going clockwise
-    switch (side)
-    {
-    case 0: //Up
-        randomSpawn = { rand() % (int)m_ArenaSize.x, -(int)newZombie->GetSpriteGlobalBounds().height};
-        break;
-    case 1: //Right
-        randomSpawn = {(int)m_ArenaSize.x + (int)newZombie->GetSpriteGlobalBounds().width, rand() % (int)m_ArenaSize.y };
-        break;
-    case 2: //Down
-        randomSpawn = { rand() % (int)m_ArenaSize.x, (int)m_ArenaSize.y + (int)newZombie->GetSpriteGlobalBounds().height};
-        break;
-    case 3: //Left
-        randomSpawn = {-(int)newZombie->GetSpriteGlobalBounds().width, rand() % (int)m_ArenaSize.y };
-        break;
-    }
-
-    newZombie->Spawn(randomSpawn.x, randomSpawn.y);
-    m_Zombies.push_back(newZombie);
-}
-
-void GameManager::Reset()
-{
-    for (size_t i = 0; i < m_Zombies.size(); i++)
-    {
-        delete m_Zombies[i];
-    }
-    m_Zombies.clear();
-
-    for (size_t i = 0; i < m_Bullets.size(); i++)
-    {
-        delete m_Bullets[i];
-    }
-    m_Bullets.clear();
 }
