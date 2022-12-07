@@ -3,8 +3,7 @@
 class CrawlerZombie : public Zombie
 {
 public:
-    CrawlerZombie(int, int, std::string);
-
+    CrawlerZombie(int, int, string);
 private:
     const int CRAWLER_HEALTH = 150;
     const int CRAWLER_SPEED = 15;
