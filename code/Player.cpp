@@ -1,13 +1,10 @@
 #include "Player.h"
-#include <iostream>
-
 
 Player::Player(int _arenaX, int _arenaY, int _startingHealth, std::string _path) : Character(_arenaX,_arenaY, _path)
 {
 	SetHealth(STARTING_HEALTH);
 	SetSpeed(STARTING_SPEED);
 }
-
 
 void Player::MoveLeft()
 {
@@ -61,7 +58,6 @@ void Player::Update(float elapsedTime)
 	Vector2f desiredDirection = {m_CharPosition.x, m_CharPosition.y};
 	desiredDirection += {playerInputVector.x * m_Speed * elapsedTime, playerInputVector.y * -m_Speed * elapsedTime};
 
-
 	SetPosition(desiredDirection);
 
 	//Move the player and set sprite scale (which way its facing)
@@ -92,7 +88,7 @@ void Player::DetermineMoveDirection()
 	}
 }
 
-Time Player::GetLastHitTime()
+Time Player::GetLastHitTime() const
 {
 	return m_LastHit;
 }
@@ -115,7 +111,7 @@ void Player::Heal(int amount)
 	if (m_Health > m_MaxHealth) m_Health = m_MaxHealth;
 }
 
-int Player::GetHealth()
+int Player::GetHealth() const
 {
 	return m_Health;
 }
