@@ -11,7 +11,7 @@ class Weapon
 public:
     Weapon();
     void Update(Vector2f, Vector2f);
-    Sprite GetSprite();
+    Sprite GetSprite() const;
 private:
     Vector2f m_WorldPosition;
     Vector2f m_WorldDirection;
