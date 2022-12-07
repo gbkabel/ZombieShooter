@@ -13,7 +13,6 @@ Pickup::Pickup()
 
 		// How much is pickup worth
 		m_Value = HEALTH_START_VALUE;
-
 	}
 
 	m_Sprite.setOrigin(25, 25);
@@ -22,10 +21,8 @@ Pickup::Pickup()
 	m_SecondsToWait = START_WAIT_TIME;
 }
 
-
 void Pickup::setArena(IntRect arena)
 {
-
 	// Copy the details of the arena to the pickup's m_Arena
 	m_Arena.left = arena.left + 50;
 	m_Arena.width = arena.width - 50;
@@ -84,7 +81,6 @@ void Pickup::update(float elapsedTime)
 		m_SecondsSinceDeSpawn += elapsedTime;
 	}
 
-
 	// Do we need to hide a pickup?
 	if (m_SecondsSinceSpawn > m_SecondsToLive && m_Spawned)
 	{
@@ -99,7 +95,6 @@ void Pickup::update(float elapsedTime)
 		// spawn the pickup and reset the timer
 		spawn();
 	}
-
 }
 
 void Pickup::upgrade()
