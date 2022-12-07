@@ -4,8 +4,6 @@
 #include "Character.h"
 #include <string>
 
-using namespace sf;
-
 class Zombie : public Character
 {
 private:
