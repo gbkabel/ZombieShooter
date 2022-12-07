@@ -4,6 +4,8 @@ Player::Player(int _arenaX, int _arenaY, int _startingHealth, std::string _path)
 {
 	SetHealth(STARTING_HEALTH);
 	SetSpeed(STARTING_SPEED);
+	m_HurtBuffer.loadFromFile("sounds/8bit-PlayerHurt1.wav");
+	m_HurtSound.setBuffer(m_HurtBuffer);
 }
 
 void Player::MoveLeft()
@@ -99,6 +101,7 @@ bool Player::Hit(Time timeHit, int damage)
 	{
 		m_LastHit = timeHit;
 		m_Health -= damage;
+		m_HurtSound.play();
 		if (m_Health < 0) m_Health = 0;
 		return true;
 	}

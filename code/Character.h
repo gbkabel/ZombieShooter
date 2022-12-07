@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <cmath>
 
@@ -12,6 +13,8 @@ protected:
     Texture m_MainTexture;
 	Sprite m_Sprite;
 	Vector2f m_CharPosition;
+    SoundBuffer m_HurtBuffer;
+    Sound m_HurtSound;
 	int m_SpriteHDirection = 1;
 	Vector2i m_ArenaSize;
     int m_Health;

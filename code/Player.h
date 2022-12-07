@@ -1,5 +1,4 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 #include "Character.h"
 
 class Player : public Character
@@ -32,5 +31,3 @@ public:
 	void StopDown();
 	void Update(float elapsedTime);
 };
-
-#endif

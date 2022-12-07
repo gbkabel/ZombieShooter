@@ -8,6 +8,7 @@
 #include "Zombie.h"
 #include "NormalZombie.h"
 #include "CrawlerZombie.h"
+#include <SFML/Audio.hpp>
 
 class GameManager
 {
@@ -16,6 +17,8 @@ private:
     const int NUM_STARTING_ZOMBIES = 15;
     const size_t MAX_ZOMBIES_ON_SCREEN = 100;
     const int SPAWN_COOLDOWN_AMOUNT = 200;
+    SoundBuffer m_ShootBuffer;
+    Sound m_ShootSound;
     Time lastSpawn;
     Time lastPressed;
 	float fireRate = 1;

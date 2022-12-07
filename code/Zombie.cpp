@@ -3,6 +3,8 @@
 Zombie::Zombie(int _arenaX, int _arenaY, int _health, string _path) : Character(_arenaX, _arenaY, _path)
 {
 	SetHealth(_health);
+	m_HurtBuffer.loadFromFile("sounds/8bit-ZombieHit1.wav");
+	m_HurtSound.setBuffer(m_HurtBuffer);
 }
 
 void Zombie::Spawn(int _startX, int _startY)
@@ -55,10 +57,11 @@ bool Zombie::IsAlive() const
 bool Zombie::Hit(int _damage)
 {
 	m_Health -= _damage;
+	m_HurtSound.play();
+
 	if (m_Health <= 0)
 	{
 		m_IsAlive = false;
-
 		m_MainTexture.loadFromFile("graphics/bloodPool1.png");
 		m_Sprite.setTexture(m_MainTexture);
 	}

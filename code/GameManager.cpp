@@ -3,7 +3,14 @@
 #include "Bullet.h"
 #include <random>
 
-// Private Functions
+
+GameManager::GameManager(Vector2f _arenaSize)
+{
+	m_ArenaSize = _arenaSize;
+	m_ShootBuffer.loadFromFile("sounds/8bit-Gunshot1.wav");
+	m_ShootSound.setBuffer(m_ShootBuffer);
+}
+
 Zombie* GameManager::GetARandomZombieType() const
 {
 	int r = rand() % NUM_ZOMBIE_TYPES;
@@ -47,12 +54,6 @@ void GameManager::SpawnNewZombie()
 
 	newZombie->Spawn(randomSpawn.x, randomSpawn.y);
 	m_Zombies.push_back(newZombie);
-}
-
-// Public Functions
-GameManager::GameManager(Vector2f _arenaSize)
-{
-	m_ArenaSize = _arenaSize;
 }
 
 void GameManager::StartGame()
@@ -114,6 +115,7 @@ void GameManager::ShootBullets(Player* _player, Vector2f _direction, Time _total
 			Bullet* newBullet = new Bullet();
 			m_Bullets.push_back(newBullet);
 			newBullet->shoot(_player->GetCharPosition().x, _player->GetCharPosition().y, _direction.x, _direction.y);
+			m_ShootSound.play();
 			lastPressed = _totalGameTime;
 		}
 	}
