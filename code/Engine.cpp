@@ -28,7 +28,6 @@ void Engine::Run()
     {
         Time dt = clock.restart();
         m_TotalGameTime += dt;
-
         Input();
         Update(dt.asSeconds());
         Draw();
