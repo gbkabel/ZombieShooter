@@ -1,8 +1,6 @@
 #include "TextureHolder.h"
 #include <assert.h>
 
-
-
 TextureHolder* TextureHolder::m_s_Instance = nullptr;
 
 TextureHolder::TextureHolder()
@@ -23,7 +21,6 @@ sf::Texture& TextureHolder::GetTexture(std::string const& filename)
 	auto keyValuePair = m.find(filename);
 	// auto is equivelant of map<string, Texture>::iterator
 	
-		
 	// Did we find a match?
 	if (keyValuePair != m.end())
 	{
