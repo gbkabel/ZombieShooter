@@ -20,8 +20,7 @@ void GameManager::ShootBullets(Player* _player, Vector2f _direction, Time _total
             Bullet* newBullet = new Bullet();
             newBullet->shoot(_player->GetCharPosition().x, _player->GetCharPosition().y, _direction.x, _direction.y);
             m_Bullets.push_back(newBullet);
-
-			lastPressed = _totalGameTime;
+		lastPressed = _totalGameTime;
 		}
 	}
 }
@@ -31,7 +30,9 @@ void GameManager::CheckZombies(Player* _player, float _dtAsSeconds)
     for (size_t i = 0; i < m_Zombies.size(); i++)
     {
         if (m_Zombies[i]->IsAlive())
+	{
             m_Zombies[i]->Update(_player->GetCharPosition(), _dtAsSeconds);
+	}
     }
 }
 
@@ -39,7 +40,10 @@ void GameManager::CheckBullets(float _dtAsSeconds)
 {
     for (size_t i = 0; i < m_Bullets.size(); i++)
     {
-        if (m_Bullets[i]->isInFlight()) m_Bullets[i]->update(_dtAsSeconds);
+        if (m_Bullets[i]->isInFlight()) 
+	{
+		m_Bullets[i]->update(_dtAsSeconds);
+	}
         else 
         {
             delete m_Bullets[i];
@@ -87,7 +91,6 @@ void GameManager::CheckForCollision(Player* _player, Time _timeHit)
             }
         }
     }
-
     //Check if player has touched a collision
     for (size_t i = 0; i < m_Pickups.size(); i++)
     {
