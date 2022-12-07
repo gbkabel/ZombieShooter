@@ -17,9 +17,9 @@ protected:
 public:
 	Zombie(int, int, int, std::string);
 	bool Hit(int);
-	int GetKillValue();
-	int GetDamageValue();
-	bool IsAlive();
+	int GetKillValue() const;
+	int GetDamageValue() const;
+	bool IsAlive() const ;
 	void Spawn(int, int) override;
 	void Update(Vector2f, float);
 	virtual ~Zombie();
