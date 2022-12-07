@@ -17,7 +17,7 @@ void Weapon::Update(Vector2f _playerCoords, Vector2f _mouseCoords)
     m_Sprite.setRotation(angle * 180 / M_PI);
 }
 
-Sprite Weapon::GetSprite()
+Sprite Weapon::GetSprite() const
 {
     return m_Sprite;
 }
