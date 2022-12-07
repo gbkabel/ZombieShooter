@@ -11,7 +11,6 @@ void Engine::Draw()
     m_Window.setView(m_HudView);    
     Vector2f mouseWorldPosition;
 
-
     switch (state)
     {
     case (State::MAIN_MENU):
@@ -29,7 +28,6 @@ void Engine::Draw()
         RenderGameOverScene();
         break;
     }
-        
 	m_Window.display();
 }
 
@@ -76,10 +74,8 @@ void Engine::RenderMainMenu()
 {
     textboxString = "Zombie Shooter V2";
     DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE*2, {windowSize.x/2,0}, TextBoxAnchor::TOP_CENTER);
-
     textboxString = "Press Enter to Start";
     DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, { windowSize.x/2, windowSize.y/2 });
-
     m_Window.draw(textbox);
 }
 
