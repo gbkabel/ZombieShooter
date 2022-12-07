@@ -3,9 +3,6 @@
 #include "Player.h"
 #include "TextureHolder.h"
 
-
-using namespace sf;
-
 class Pickup
 {
 private:
@@ -38,9 +35,8 @@ private:
 	// Public prototypes go here
 public:
 	Pickup();
-	
 	virtual void Obtain(Player*) = 0;
-
+	
 	// Prepare a new pickup
 	void setArena(IntRect arena);
 
@@ -63,5 +59,4 @@ public:
 
 	// Upgrade the value of each pickup
 	void upgrade();
-
 };
