@@ -9,8 +9,6 @@
 #include "NormalZombie.h"
 #include "CrawlerZombie.h"
 
-using namespace std;
-
 class GameManager
 {
 private:
