@@ -37,3 +37,5 @@ x86
 *.exe
 *.out
 *.app
+/Release
+/Debug

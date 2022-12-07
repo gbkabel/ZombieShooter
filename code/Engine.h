@@ -1,5 +1,4 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
@@ -16,57 +15,56 @@ class Engine
 {
 public:
 	Engine();
-        void Run();
+    void Run();
+
 private:
-        const int TILE_SIZE = 50;
-        const int VERTS_IN_QUAD = 4;
-        Vector2f windowSize = {640, 368};
+    const int TILE_SIZE = 50;
+    const int VERTS_IN_QUAD = 4;
+    Vector2f windowSize = {640, 368};
 
-        Font m_UiFont;
-        Font m_TitleFont;
+    Font m_UiFont;
+    Font m_TitleFont;
         
-        Text textbox;
-        const int MAIN_MENU_CHAR_SIZE = 32;
+    Text textbox;
+    const int MAIN_MENU_CHAR_SIZE = 32;
 
-        enum class TextBoxAnchor { TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT };
+    enum class TextBoxAnchor { TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT };
 	enum class State { MAIN_MENU, PAUSED, GAME_OVER, PLAYING };
 	State state = State::MAIN_MENU;
 
-        float m_WindowScale = 0.8f;
-        float m_TimeElapsed;
+    float m_WindowScale = 0.8f;
+    float m_TimeElapsed;
 
-    	Player* player;
-        GameManager* gm;
+    Player* player;
+    GameManager* gm;
 
-        Clock clock;
+    Clock clock;
 
-        VertexArray background;
-        Texture textureBackground;
-        TextureHolder th;        
-        RenderWindow m_Window;
-        View m_MainView;
-        View m_HudView;
+    VertexArray background;
+    Texture textureBackground;
+    TextureHolder th;        
+    RenderWindow m_Window;
+    View m_MainView;
+    View m_HudView;
 
-	    Time m_TotalGameTime;
-    	Vector2f mouseScreenPosition;
+	Time m_TotalGameTime;
+    Vector2f mouseScreenPosition;
 
-        Sprite m_BackgroundSprite;
-        Texture m_BackgroundTexture;
+    Sprite m_BackgroundSprite;
+    Texture m_BackgroundTexture;
 
-	    Sprite spriteCrosshair;
-        Texture textureCrosshair;
+	Sprite spriteCrosshair;
+    Texture textureCrosshair;
 
-        string textboxString = "Debug";
-        Weapon weapon;
+    string textboxString = "Debug";
+    Weapon weapon;
 
-        void Input();
-        void Update(float dt);
-        void Draw();
+    void Input();
+    void Update(float dt);
+    void Draw();
 
-        void DrawTextBox(Text& _textbox, string _text, int _fontSize, Vector2f _textPosition, TextBoxAnchor originPoint = TextBoxAnchor::CENTER);
-        void RenderMainMenu();
-        void RenderGameScene();
-        void RenderGameOverScene();
+    void DrawTextBox(Text& _textbox, string _text, int _fontSize, Vector2f _textPosition, TextBoxAnchor originPoint = TextBoxAnchor::CENTER);
+    void RenderMainMenu();
+    void RenderGameScene();
+    void RenderGameOverScene();
 };
-
-#endif

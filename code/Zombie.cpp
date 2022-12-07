@@ -69,6 +69,7 @@ int Zombie::GetDamageValue() const
 {
 	return m_Damage;
 }
+
 Zombie::~Zombie()
 {
 }

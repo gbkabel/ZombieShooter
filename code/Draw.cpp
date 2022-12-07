@@ -95,10 +95,9 @@ void Engine::RenderGameScene()
     m_Window.draw(player->GetSprite());
     m_Window.draw(weapon.GetSprite());
 
-    vector<Zombie*> tempZombies = gm->GetZombies();
-    for (size_t i = 0; i < tempZombies.size(); i++)
+    for (size_t i = 0; i < gm->GetZombies().size(); i++)
     {
-        m_Window.draw(tempZombies[i]->GetSprite());
+        m_Window.draw(gm->GetZombies()[i]->GetSprite());
     }
 
     for (size_t i = 0; i < gm->GetBullets().size(); i++)

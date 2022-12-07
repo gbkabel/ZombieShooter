@@ -1,17 +1,14 @@
-#ifndef ZOMBIE_H
-#define ZOMBIE_H
-
+#pragma once
 #include "Character.h"
 #include <string>
 
 class Zombie : public Character
 {
 private:
-	bool m_IsAlive;
+	bool m_IsAlive = false;
 protected:
-	int m_Damage;
+	int m_Damage = 10;
 	int m_KillScoreValue = 1;
-	void Damage(int);
 public:
 	Zombie(int, int, int, std::string);
 	bool Hit(int);
@@ -22,5 +19,3 @@ public:
 	void Update(Vector2f, float);
 	virtual ~Zombie();
 };
-
-#endif

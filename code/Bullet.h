@@ -1,5 +1,4 @@
-#ifndef BULLET_H
-#define BULLET_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
@@ -58,11 +57,6 @@ public:
 
     Sprite GetSprite() const;
 
-	// Return the actual shape (for drawing)
-	RectangleShape getShape();
-
 	// Update the bullet each frame
 	void update(float elapsedTime);
 };
-
-#endif

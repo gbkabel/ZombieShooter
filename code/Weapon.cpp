@@ -1,5 +1,6 @@
 #include "Weapon.h"
 
+
 Weapon::Weapon()
 {
     m_Texture.loadFromFile("graphics/tommygun1.png");
@@ -14,7 +15,7 @@ void Weapon::Update(Vector2f _playerCoords, Vector2f _mouseCoords)
     if (angle >= 1.5 || angle <= -1.5) m_Sprite.setScale(1, -1);
     else m_Sprite.setScale(1,1);
     m_Sprite.setPosition(_playerCoords.x, _playerCoords.y);
-    m_Sprite.setRotation(angle * 180 / M_PI);
+    m_Sprite.setRotation(angle * 180.0 / M_PI);
 }
 
 Sprite Weapon::GetSprite() const
