@@ -1,6 +1,9 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
+#include <cmath>
+#include <iostream>
+
 using namespace sf;
 
 class Weapon
