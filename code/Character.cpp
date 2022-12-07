@@ -1,7 +1,22 @@
 #include "Character.h"
 
 // Private Functions
+void Character::SetPosition(Vector2f _position)
+{
+    this->m_CharPosition = _position;
+    this->m_Sprite.setPosition(m_CharPosition.x, m_CharPosition.y);
+}
 
+void Character::SetHealth(int _amount)
+{
+	this->m_Health = _amount;
+	this->m_MaxHealth = _amount;
+}
+
+void Character::SetSpeed(float _newSpeed)
+{
+	this->m_Speed = _newSpeed;
+}
 
 // Public Functions
 Character::Character(int _arenaX, int _arenaY, string _path = "")
@@ -73,21 +88,4 @@ void Character::ValidateCollision()
 int Character::GetHealth() const
 {
 	return this->m_Health;
-}
-
-void Character::SetPosition(Vector2f _position)
-{
-    this->m_CharPosition = _position;
-    this->m_Sprite.setPosition(m_CharPosition.x, m_CharPosition.y);
-}
-
-void Character::SetSpeed(float _newSpeed)
-{
-	this->m_Speed = _newSpeed;
-}
-
-void Character::SetHealth(int _amount)
-{
-	this->m_Health = _amount;
-	this->m_MaxHealth = _amount;
 }

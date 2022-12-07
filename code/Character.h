@@ -17,8 +17,8 @@ protected:
     int m_MaxHealth;
 	float m_Speed = 100;
     void SetPosition(Vector2f);
-    void SetSpeed(float);
     void SetHealth(int);
+    void SetSpeed(float);
 public:
     Character(int, int, string);
     void LoadAndSetTextureFromFile(string);
