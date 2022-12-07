@@ -1,6 +1,6 @@
 #include "Zombie.h"
 
-Zombie::Zombie(int _arenaX, int _arenaY, int _health, std::string _path) : Character(_arenaX, _arenaY, _path)
+Zombie::Zombie(int _arenaX, int _arenaY, int _health, string _path) : Character(_arenaX, _arenaY, _path)
 {
 	SetHealth(_health);
 }
@@ -34,7 +34,6 @@ void Zombie::Update(Vector2f _coords, float _elapsedTime)
 	desiredDirection.x += normalizedDirection.x * m_Speed * _elapsedTime;
 	desiredDirection.y += normalizedDirection.y * m_Speed * _elapsedTime;
 
-
 	SetPosition(desiredDirection);
 
 	//Move the Zombie and set sprite scale (which way its facing)
@@ -43,12 +42,12 @@ void Zombie::Update(Vector2f _coords, float _elapsedTime)
 	//ValidateCollision(); //Check collision
 }
 
-int Zombie::GetKillValue()
+int Zombie::GetKillValue() const
 {
 	return m_KillScoreValue;
 }
 
-bool Zombie::IsAlive()
+bool Zombie::IsAlive() const
 {
 	return m_IsAlive;
 }
@@ -66,7 +65,7 @@ bool Zombie::Hit(int _damage)
 	return !m_IsAlive;
 }
 
-int Zombie::GetDamageValue()
+int Zombie::GetDamageValue() const
 {
 	return m_Damage;
 }
