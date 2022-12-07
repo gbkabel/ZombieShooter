@@ -3,8 +3,7 @@
 class NormalZombie : public Zombie
 {
 public:
-    NormalZombie(int, int, std::string);
-
+    NormalZombie(int, int, string);
 private:
     const int NORMAL_HEALTH = 100;
     const int NORMAL_SPEED = 25;
