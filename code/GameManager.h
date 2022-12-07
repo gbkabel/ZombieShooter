@@ -29,14 +29,14 @@ private:
     Vector2f m_ArenaSize;
 public:
     GameManager(Vector2f);
+	void StartGame();
+	void Update(Time);
+	int GetScore() const;
+	void Reset();
+	void CheckZombies(Player*, float);
     void ShootBullets(Player*, Vector2f, Time);
-    void CheckZombies(Player*, float);
     void CheckBullets(float);
     void CheckForCollision(Player*, Time);
-    void StartGame();
-    void Reset();
-    void Update(Time);
-    int GetScore();
     vector<Zombie*> GetZombies() const;
     vector<Bullet*> GetBullets() const;
     vector<Pickup*> GetPickups() const;
