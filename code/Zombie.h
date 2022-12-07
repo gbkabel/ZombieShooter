@@ -22,6 +22,7 @@ public:
 	bool IsAlive();
 	void Spawn(int, int) override;
 	void Update(Vector2f, float);
+	virtual ~Zombie();
 };
 
 #endif

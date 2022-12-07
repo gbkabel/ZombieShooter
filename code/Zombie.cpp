@@ -70,3 +70,6 @@ int Zombie::GetDamageValue()
 {
 	return m_Damage;
 }
+Zombie::~Zombie()
+{
+}
