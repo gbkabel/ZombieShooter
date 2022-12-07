@@ -8,7 +8,6 @@ void Engine::Update(float _dt)
     if (state == State::PLAYING)
     {
         m_TimeElapsed += _dt;
-
         if (player->GetHealth() <= 0) 
         {
             state = State::GAME_OVER;
@@ -21,6 +20,5 @@ void Engine::Update(float _dt)
         gm->ShootBullets(player, mouseScreenPosition, m_TotalGameTime);
         gm->CheckForCollision(player, m_TotalGameTime);
         gm->CheckBullets(_dt);
-
     }
 }
