@@ -17,8 +17,6 @@ void Bullet::shoot(float startX, float startY,
 
 	Vector2f rawDirection = {targetX - startX, targetY - startY};
 
-	
-
 	//Normalize Input vector so that the magnitude is always 1
 	if (abs(rawDirection.x) > 0 || abs(rawDirection.y) > 0)
 	{
@@ -26,9 +24,7 @@ void Bullet::shoot(float startX, float startY,
 		m_DirectionOfTravel = { rawDirection.x / m, rawDirection.y / m};
 	}
 
-
-	// Finally, assign the results to the
-	// member variables
+	// Finally, assign the results to the member variables
 	m_XTarget = targetX;
 	m_YTarget = targetY;
 
@@ -58,7 +54,6 @@ FloatRect Bullet::getPosition()
 	return m_Sprite.getGlobalBounds();
 }
 
-
 void Bullet::update(float elapsedTime)
 {
 	// Update the bullet position variables
@@ -74,7 +69,6 @@ void Bullet::update(float elapsedTime)
 	{
 		m_InFlight = false;
 	}
-
 }
 
 Sprite Bullet::GetSprite() const

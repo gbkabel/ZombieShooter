@@ -51,8 +51,7 @@ public:
 	bool isInFlight();
 
 	// Launch a new bullet
-	void shoot(float startX, float startY,
-		float xTarget, float yTarget);
+	void shoot(float startX, float startY, float xTarget, float yTarget);
 
 	// Tell the calling code where the bullet is in the world
 	FloatRect getPosition();
@@ -64,7 +63,6 @@ public:
 
 	// Update the bullet each frame
 	void update(float elapsedTime);
-
 };
 
 #endif
