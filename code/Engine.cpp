@@ -10,8 +10,10 @@ Engine::Engine()
     m_MainView.setSize(windowSize);
     m_HudView.reset(FloatRect(0,0, windowSize.x, windowSize.y));
 
-	font.loadFromFile("fonts/Zombie.ttf");
-    textbox.setFont(font);
+	m_TitleFont.loadFromFile("fonts/Zombie.ttf");
+	m_UiFont.loadFromFile("fonts/Neo Tech.ttf");
+
+    textbox.setFont(m_TitleFont);
     textbox.setOutlineColor(Color::Black);
     textbox.setOutlineThickness(2);
 

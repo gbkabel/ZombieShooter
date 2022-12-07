@@ -21,7 +21,10 @@ private:
         const int TILE_SIZE = 50;
         const int VERTS_IN_QUAD = 4;
         Vector2f windowSize = {640, 368};
-        Font font;
+
+        Font m_UiFont;
+        Font m_TitleFont;
+        
         Text textbox;
         const int MAIN_MENU_CHAR_SIZE = 32;
 

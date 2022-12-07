@@ -9,8 +9,7 @@ void Engine::Draw()
     m_Window.clear();
     m_Window.setView(m_MainView);
     m_Window.setView(m_HudView);    
-    Vector2f mouseWorldPosition;
-
+    
     switch (state)
     {
     case (State::MAIN_MENU):
@@ -22,6 +21,7 @@ void Engine::Draw()
         break;
         
     case (State::PAUSED):
+    
         break;
         
     case (State::GAME_OVER):
@@ -73,7 +73,12 @@ void Engine::DrawTextBox(Text& _textbox, std::string _text, int _fontSize, Vecto
 void Engine::RenderMainMenu()
 {
     textboxString = "Zombie Shooter V2";
+    textbox.setFont(m_TitleFont);
+    textbox.setFillColor(Color::Red);
     DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE*2, {windowSize.x/2,0}, TextBoxAnchor::TOP_CENTER);
+
+    textbox.setFont(m_UiFont);
+    textbox.setFillColor(Color::White);
     textboxString = "Press Enter to Start";
     DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, { windowSize.x/2, windowSize.y/2 });
     m_Window.draw(textbox);
@@ -108,6 +113,7 @@ void Engine::RenderGameScene()
     textboxString = ss.str();
     textPosition = { windowSize.x - ((MAIN_MENU_CHAR_SIZE * textboxString.length())/2), 0};
     textbox.setFillColor(Color::White);
+    textbox.setFont(m_UiFont);
     DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, textPosition, TextBoxAnchor::TOP_LEFT);
 
     textboxString = "Health: " + to_string(player->GetHealth());
@@ -127,12 +133,14 @@ void Engine::RenderGameOverScene()
     stringstream ss;
     ss.str("");
 
+    textbox.setFont(m_TitleFont);
     textboxString = "Game Over";
     textPosition = {windowSize.x/2, windowSize.y/2};
     textbox.setFillColor(Color::Red);
     DrawTextBox(textbox, textboxString, MAIN_MENU_CHAR_SIZE, {textPosition.x, textPosition.y - textPosition.y/2}, TextBoxAnchor::CENTER);
-
+    
     ss << "Your score: " << gm->GetScore() << " points.";
+    textbox.setFont(m_UiFont);
     textbox.setFillColor(Color::White);
     DrawTextBox(textbox, ss.str(), MAIN_MENU_CHAR_SIZE/2, textPosition, TextBoxAnchor::CENTER);
 
