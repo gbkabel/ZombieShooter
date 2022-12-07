@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAMEMANAGER_H
+#define GAMEMANAGER_H
+
 #include <vector>
 #include "Player.h"
 #include "Bullet.h"
@@ -42,3 +44,5 @@ public:
     vector<Pickup*> GetPickups() const;
     enum class ZombieTypes {NORMAL, CRAWLER, TANK, SPRINTER};
 };
+
+#endif
