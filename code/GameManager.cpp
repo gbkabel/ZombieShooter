@@ -3,8 +3,9 @@
 #include "Bullet.h"
 #include <random>
 
-using namespace std;
+// Private Functions
 
+// Public Functions
 GameManager::GameManager(Vector2f _arenaSize)
 {
     m_ArenaSize = _arenaSize;
