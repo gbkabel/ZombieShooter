@@ -28,7 +28,6 @@ void Engine::Input()
 					//int tileSize = 
 					CreateBackground(background, arena);
 					gm->StartGame();
-					
 
 					state = State::PLAYING;
 					player->Spawn(windowSize.x/2, windowSize.y/2);
@@ -44,7 +43,6 @@ void Engine::Input()
 			}
 		}	
 
-    
 	// Where is the mouse pointer
 	mouseScreenPosition = m_Window.mapPixelToCoords(Mouse::getPosition(), m_HudView);
 
