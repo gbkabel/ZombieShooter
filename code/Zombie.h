@@ -1,7 +1,7 @@
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
 
-#include "Player.h"
+#include "Character.h"
 #include <string>
 
 using namespace sf;

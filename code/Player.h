@@ -1,10 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Character.h"
-#include <SFML/Graphics.hpp>
-#include <cmath>
-
-using namespace sf;
 
 class Player : public Character
 {
