@@ -7,6 +7,7 @@
 #include "Zombie.h"
 #include <vector>
 #include "GameManager.h"
+#include "Weapon.h"
 
 using namespace std;
 using namespace sf;
@@ -54,6 +55,7 @@ class Engine
         Texture textureCrosshair;
 
         string textboxString = "Debug";
+        Weapon weapon;
 
 
         void Input();

@@ -15,6 +15,7 @@ void Engine::Update(float _dt)
             gm->Reset();
         }
         player->Update(_dt);
+        weapon.Update(player->GetCharPosition(), mouseScreenPosition);
         gm->Update(m_TotalGameTime);
         gm->CheckZombies(player, _dt);
         gm->ShootBullets(player, mouseScreenPosition, m_TotalGameTime);

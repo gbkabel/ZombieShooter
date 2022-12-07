@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include "TextureHolder.h"
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -93,6 +92,7 @@ void Engine::RenderGameScene()
     m_Window.setMouseCursorVisible(false);
     m_Window.draw(background, &textureBackground);
     m_Window.draw(player->GetSprite());
+    m_Window.draw(weapon.GetSprite());
 
     vector<Zombie*> tempZombies = gm->GetZombies();
     for (size_t i = 0; i < tempZombies.size(); i++)
