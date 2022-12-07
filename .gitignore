@@ -36,3 +36,4 @@ x86
 *.app
 /Release
 /Debug
+/.vs

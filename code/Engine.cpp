@@ -3,7 +3,7 @@
 
 Engine::Engine()
 {
-	player = new Player(windowSize.x, windowSize.y, 100, "graphics/shooter1.png");
+	player = new Player(windowSize.x, windowSize.y, 100, "graphics/shooter2.png");
     gm = new GameManager({windowSize.x, windowSize.y});
     
     m_Window.create(VideoMode(windowSize.x, windowSize.y), "Zombie Shooter V2");
