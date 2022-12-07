@@ -29,8 +29,8 @@ private:
         const int MAIN_MENU_CHAR_SIZE = 32;
 
         enum class TextBoxAnchor { TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT };
-	    enum class State { MAIN_MENU, PAUSED, GAME_OVER, PLAYING };
-	    State state = State::MAIN_MENU;
+	enum class State { MAIN_MENU, PAUSED, GAME_OVER, PLAYING };
+	State state = State::MAIN_MENU;
 
         float m_WindowScale = 0.8f;
         float m_TimeElapsed;
