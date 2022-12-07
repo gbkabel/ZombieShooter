@@ -1,7 +1,4 @@
 #Ignore visual studio files
-.vs*
-*.vcx*
-*.sln
 x64
 x86
 
