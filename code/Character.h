@@ -3,6 +3,7 @@
 #include <iostream>
 
 using namespace sf;
+using namespace std;
 
 class Character
 {
@@ -18,16 +19,15 @@ protected:
     void SetPosition(Vector2f);
     void SetSpeed(float);
     void SetHealth(int);
-
 public:
-    Character(int, int, std::string);
-    int GetHealth();
-	void ValidateCollision();
-    void LoadAndSetTextureFromFile(std::string);
+    Character(int, int, string);
+    void LoadAndSetTextureFromFile(string);
     void SetSpriteOrigin(Vector2f);
-	virtual void Spawn(int, int) = 0;
+    virtual void Spawn(int, int) = 0;
     Vector2f GetCharPosition() const;
-    int GetSpriteHorizontalDirection() const;
     Sprite GetSprite() const;
+    int GetSpriteHorizontalDirection() const;
     FloatRect GetSpriteGlobalBounds() const;
+    void ValidateCollision();
+    int GetHealth() const;
 };

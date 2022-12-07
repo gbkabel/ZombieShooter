@@ -1,6 +1,10 @@
 #include "Character.h"
 
-Character::Character(int _arenaX, int _arenaY, std::string _path = "")
+// Private Functions
+
+
+// Public Functions
+Character::Character(int _arenaX, int _arenaY, string _path = "")
 {
 	this->m_ArenaSize = { _arenaX, _arenaY };
 
@@ -9,7 +13,7 @@ Character::Character(int _arenaX, int _arenaY, std::string _path = "")
 	SetPosition({-m_Sprite.getLocalBounds().width, -m_Sprite.getLocalBounds().height});
 }
 
-void Character::LoadAndSetTextureFromFile(std::string _path)
+void Character::LoadAndSetTextureFromFile(string _path)
 {
     this->m_MainTexture.loadFromFile(_path);
     this->m_Sprite.setTexture(m_MainTexture);
@@ -18,6 +22,26 @@ void Character::LoadAndSetTextureFromFile(std::string _path)
 void Character::SetSpriteOrigin(Vector2f _coords)
 {
     this->m_Sprite.setOrigin(_coords.x, _coords.y);
+}
+
+Vector2f Character::GetCharPosition() const
+{
+    return this->m_CharPosition;
+}
+
+Sprite Character::GetSprite() const
+{
+    return this->m_Sprite;
+}
+
+int Character::GetSpriteHorizontalDirection() const
+{
+    return this->m_SpriteHDirection;
+}
+
+FloatRect Character::GetSpriteGlobalBounds() const
+{
+    return this->m_Sprite.getGlobalBounds();
 }
 
 void Character::ValidateCollision()
@@ -46,24 +70,9 @@ void Character::ValidateCollision()
 	}
 }
 
-int Character::GetSpriteHorizontalDirection() const
+int Character::GetHealth() const
 {
-    return this->m_SpriteHDirection;
-}
-
-Sprite Character::GetSprite() const
-{
-    return this->m_Sprite;
-}
-
-FloatRect Character::GetSpriteGlobalBounds() const
-{
-    return this->m_Sprite.getGlobalBounds();
-}
-
-Vector2f Character::GetCharPosition() const
-{
-    return this->m_CharPosition;
+	return this->m_Health;
 }
 
 void Character::SetPosition(Vector2f _position)
@@ -75,11 +84,6 @@ void Character::SetPosition(Vector2f _position)
 void Character::SetSpeed(float _newSpeed)
 {
 	this->m_Speed = _newSpeed;
-}
-
-int Character::GetHealth()
-{
-	return this->m_Health;
 }
 
 void Character::SetHealth(int _amount)
